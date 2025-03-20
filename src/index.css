@@ -5,7 +5,7 @@
 body{
   height: 100%;
   margin: 0;
-  background-color: #292828;
+  background-color: #111827;
   font-family: "Poppins";
 }
 
@@ -16,7 +16,7 @@ body{
 }
 
 header{
-  background-color: #3b3b3b;
+  background-color: #1f2937;
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -25,43 +25,134 @@ header{
 header > .button-container{
   display: flex;
   justify-content: center;
-  margin-right: 10px;
+  margin-right: 8vw;
 }
 
 header > .button-container > button{
-  background-color: #292828;
+  background-color: #374151;
   border: 0;
   color: aliceblue;
   font-family: "Poppins";
-  font-size: 1.5rem;
-  border: 3px solid whitesmoke;
+  font-size: 1rem;
+  border: 0;
   border-radius: 8px;
-  margin: 30px 21px;
+  margin: 15px 10px;
   padding: 5px 30px;
+  cursor: pointer;
 }
 
-.puzzle-container{
-  background-color: #3b3b3b;
+header > .button-container > button > i{
+  margin-right: 5px;
+}
+
+.puzzle-container {
+  background-color: #1f2937;
   color: whitesmoke;
-  margin: 50px 0px;
-  border-radius: 10px;
-  height: 60vh;
-  width: 75vw;
+  margin: 50px auto;
+  border-radius: 12px;
+  min-height: 60vh;
+  width: 50vw;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding-bottom: 20px;
+  overflow: hidden;
 }
 
-.puzzle-container > h2{
-  margin-left: 20px;
+.puzzle-container > h2 {
+  padding: 20px 25px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #374151;
+  margin: 0;
 }
 
-form > input{
-  border: 1px solid black;
+.flex-box {
+  display: flex;
+  width: 100%;
+  height: calc(100% - 70px);
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.puzzle-content {
+  background-color: #374151;
+  margin: 10px 25px 25px 25px;
   border-radius: 10px;
-  font-family: "Poppins";
+  flex: 1;
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.puzzle-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #e5e7eb;
+}
+
+.form-container {
+  background-color: #1f2937;
+  color: aliceblue;
+  border-radius: 8px;
+  padding: 15px 20px 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.form-container > h3 {
+  font-weight: 500;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+} 
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+form > input {
+  background-color: #374151;
+  color: aliceblue;
+  border: 1px solid #4b5563;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
   font-size: 1.25rem;
-  padding: 15px 15px;
+  padding: 12px 15px;
+  flex: 1;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-form > input:focus{
+form > input:focus {
   outline: none;
-  box-shadow: none;
+  box-shadow: 0 0 0 2px #3b82f6;
+  border-color: #3b82f6;
+}
+
+form > input::placeholder {
+  color: #9ca3af;
+}
+
+form > button {
+  background-color: #3b82f6;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form > button:hover {
+  background-color: #2563eb;
+}
+
+form > button:active {
+  background-color: #1d4ed8;
+  transform: translateY(1px);
 }
