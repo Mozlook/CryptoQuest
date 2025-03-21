@@ -41,6 +41,15 @@ header > .button-container > button{
   cursor: pointer;
 }
 
+header> .button-container > button:hover {
+  background-color: #2f3846;
+}
+
+header > .button-container > button:active {
+  background-color: rgb(46, 55, 68);
+  transform: translateY(1px);
+}
+
 header > .button-container > button > i{
   margin-right: 5px;
 }
@@ -50,10 +59,12 @@ header > .button-container > button > i{
   color: whitesmoke;
   margin: 50px auto;
   border-radius: 12px;
-  min-height: 60vh;
+  height: 60vh;
   width: 50vw;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -65,20 +76,11 @@ header > .button-container > button > i{
   margin: 0;
 }
 
-.flex-box {
-  display: flex;
-  width: 100%;
-  height: calc(100% - 70px);
-  justify-content: space-between;
-  align-items: stretch;
-  flex-wrap: wrap;
-}
-
 .puzzle-content {
   background-color: #374151;
+  flex-grow: 1;
   margin: 10px 25px 25px 25px;
   border-radius: 10px;
-  flex: 1;
   padding: 25px 30px;
   display: flex;
   flex-direction: column;
@@ -96,9 +98,8 @@ header > .button-container > button > i{
   background-color: #1f2937;
   color: aliceblue;
   border-radius: 8px;
-  padding: 15px 20px 25px;
+  padding: 0px 20px 25px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
 }
 
 .form-container > h3 {
@@ -155,4 +156,19 @@ form > button:hover {
 form > button:active {
   background-color: #1d4ed8;
   transform: translateY(1px);
+}
+
+.footer{
+  position:absolute;
+  display: flex;
+  justify-content: center;
+  background-color: #1f2937;
+  color: whitesmoke;
+  width: 100vw;
+  bottom: 0;
+}
+
+.footer > span{
+ opacity: 0.6;
+ padding: 7px;
 }
