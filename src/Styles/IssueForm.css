@@ -1,0 +1,112 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.issue-form-container {
+    background: #1f2937;
+    color: whitesmoke;
+    padding: 0px 20px 20px;
+    border-radius: 8px;
+    width: 50vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.issue-form-container > p{
+    text-align: start;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.issue-form-container > form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    background-color: #374151;
+    border-radius: 10px;
+    padding: 0px 25px 25px;
+}
+
+.issue-form-container > form > label{
+    font-size: 1.25rem;
+    color: aliceblue;
+    font-weight: 500;
+    padding-top: 15px;
+} 
+
+.issue-form-container > form > input{
+    background-color: #1f2937;
+    color: aliceblue;
+    border: 1px solid #4b5563;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.25rem;
+    padding: 12px 15px;
+    flex: 1;
+}
+
+.issue-form-container > form >input:focus{
+    outline: 0;
+}
+
+.issue-form-container > form > textarea{
+    background-color: #1f2937;
+    color: aliceblue;
+    border: 1px solid #4b5563;
+    border-radius: 10px;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    resize: none;
+}
+
+.issue-form-container > form > textarea:focus{
+    outline: 0;
+}
+
+.buttons-container{
+    display: flex;
+    gap: 25px;
+    margin-top:auto;
+}
+
+.cancel {
+    margin-top: 10px;
+    background-color: #ef4444b0;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cancel:hover {
+    background-color: #dc2626;
+    transform: translateY(1px);
+}
+
+.submit-issue {
+    margin-top: 10px;
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-issue:hover {
+    background-color: #1d4ed8;
+    transform: translateY(1px);
+}

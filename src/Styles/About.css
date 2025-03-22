@@ -16,7 +16,7 @@
     padding: 0px 20px 20px;
     border-radius: 8px;
     width: 50vw;
-    height: 50vh;
+    /* height: 50vh; */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -37,8 +37,8 @@
     padding: 10px;
 }
 
-button {
-    margin-top: 10px;
+.close {
+    margin: 10px 0px 20px;
     background-color: #ef4444b0;
     color: white;
     padding: 8px 16px;
@@ -48,6 +48,6 @@ button {
     transition: 0.3s;
 }
 
-button:hover {
+.close:hover {
     background-color: #dc2626;
 }
