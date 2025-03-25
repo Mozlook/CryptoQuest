@@ -87,7 +87,7 @@ header > .button-container > button > i{
   justify-content: space-between;
 }
 
-.puzzle-content p {
+.puzzle-content > p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 20px;

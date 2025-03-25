@@ -1,6 +1,5 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useState, useMemo } from "react";
 import Header from './components/Header'
-import Puzzle from './components/puzzles/Puzzle1'
 import SubmitForm from './components/SubmitForm'
 import Footer from './components/Footer'
 import About from './components/About'
@@ -22,15 +21,18 @@ const DynamicComponent = ({ puzzleId }) => {
 
 function App() {
 
-  const [puzzleId, setPuzzleId] = useState(1);
+  const [puzzleId, setPuzzleId] = useState(3);
   const [isAboutOpen, setIsAboutOpen] = useState(false)
   const [isIssueFormOpen, setIsIssueFormOpen] = useState(false)
+
+  const memoizedPuzzle = useMemo(() => <DynamicComponent puzzleId={puzzleId} />, [puzzleId]);
 
   return (
       <main className="main">
         <Header setIsAboutOpen={setIsAboutOpen} 
-                setIsIssueFormOpen={setIsIssueFormOpen} />
-        <DynamicComponent puzzleId={puzzleId}/>
+                setIsIssueFormOpen={setIsIssueFormOpen}
+                setPuzzleId={setPuzzleId} />
+        {memoizedPuzzle}
         <SubmitForm />
         <Footer />
         {isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}

@@ -1,0 +1,15 @@
+.puzzle-content {
+    justify-content: start;
+    align-items: center;
+}
+
+.puzzle-content > p {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.puzzle-content > a{
+    font-size: 1.25rem;
+    color: aliceblue;
+}
+
