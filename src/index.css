@@ -1,175 +1,257 @@
-*{
-  box-sizing: border-box;
+* {
+	box-sizing: border-box;
 }
 
-body{
-  height: 100%;
-  margin: 0;
-  background-color: #111827;
-  font-family: "Poppins";
+:root {
+	/* Color variables */
+	--bg-primary: #111827;
+	--bg-secondary: #1f2937;
+	--bg-tertiary: #374151;
+	--text-primary: whitesmoke;
+	--text-secondary: #e5e7eb;
+	--text-muted: #9ca3af;
+	--accent-primary: #3b82f6;
+	--accent-hover: #2563eb;
+	--accent-active: #1d4ed8;
+	--border-color: #4b5563;
+
+	/* Spacing variables */
+	--spacing-xs: 0.5rem;
+	--spacing-sm: 0.75rem;
+	--spacing-md: 1rem;
+	--spacing-lg: 1.5rem;
+	--spacing-xl: 2rem;
+
+	/* Border radius */
+	--radius-sm: 8px;
+	--radius-md: 10px;
+	--radius-lg: 12px;
 }
 
-.main{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-family: "Poppins", sans-serif;
+	background-color: var(--bg-primary);
+	color: var(--text-primary);
 }
 
-header{
-  background-color: #1f2937;
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+/* Container layout - using responsive units */
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: 100vh;
+	position: relative;
+	padding-bottom: 3rem; /* Space for footer */
 }
 
-header > .button-container{
-  display: flex;
-  justify-content: center;
-  margin-right: 8vw;
+/* Header with responsive sizing */
+header {
+	background-color: var(--bg-secondary);
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 0 1rem;
 }
 
-header > .button-container > button{
-  background-color: #374151;
-  border: 0;
-  color: aliceblue;
-  font-family: "Poppins";
-  font-size: 1rem;
-  border: 0;
-  border-radius: 8px;
-  margin: 15px 10px;
-  padding: 5px 30px;
-  cursor: pointer;
+.button-container {
+	display: flex;
+	justify-content: center;
+	margin-right: clamp(1rem, 5vw, 8vw);
 }
 
-header> .button-container > button:hover {
-  background-color: #2f3846;
+.button-container button {
+	background-color: var(--bg-tertiary);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 1rem;
+	border: 0;
+	border-radius: var(--radius-sm);
+	margin: 0.9rem 0.6rem;
+	padding: 0.3rem clamp(1rem, 2vw, 1.9rem);
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.1s;
 }
 
-header > .button-container > button:active {
-  background-color: rgb(46, 55, 68);
-  transform: translateY(1px);
+.button-container button:hover {
+	background-color: #2f3846;
 }
 
-header > .button-container > button > i{
-  margin-right: 5px;
+.button-container button:active {
+	background-color: rgb(46, 55, 68);
+	transform: translateY(1px);
 }
 
+.button-container button i {
+	margin-right: 5px;
+}
+
+/* Puzzle container with responsive dimensions */
 .puzzle-container {
-  background-color: #1f2937;
-  color: whitesmoke;
-  margin: 50px auto;
-  border-radius: 12px;
-  height: 60vh;
-  width: 50vw;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+	margin: 3rem auto;
+	border-radius: var(--radius-lg);
+	height: clamp(50vh, 60vh, 70vh);
+	width: clamp(300px, 80%, 1200px);
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
-.puzzle-container > h2 {
-  padding: 20px 25px;
-  font-weight: 600;
-  font-size: 1.5rem;
-  border-bottom: 1px solid #374151;
-  margin: 0;
+.puzzle-container h2 {
+	padding: var(--spacing-lg) var(--spacing-lg);
+	font-weight: 600;
+	font-size: clamp(1.2rem, 3vw, 1.5rem);
+	border-bottom: 1px solid var(--bg-tertiary);
+	margin: 0;
 }
 
 .puzzle-content {
-  background-color: #374151;
-  flex-grow: 1;
-  margin: 10px 25px 25px 25px;
-  border-radius: 10px;
-  padding: 25px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	background-color: var(--bg-tertiary);
+	flex-grow: 1;
+	margin: var(--spacing-sm) var(--spacing-lg) var(--spacing-lg)
+		var(--spacing-lg);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-lg);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow-y: auto;
 }
 
-.puzzle-content > p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  color: #e5e7eb;
+.puzzle-content p {
+	font-size: clamp(1rem, 2vw, 1.1rem);
+	line-height: 1.6;
+	margin-bottom: var(--spacing-lg);
+	color: var(--text-secondary);
 }
 
+/* Form container with responsive spacing */
 .form-container {
-  background-color: #1f2937;
-  color: aliceblue;
-  border-radius: 8px;
-  padding: 0px 20px 25px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+	border-radius: var(--radius-sm);
+	padding: 0 var(--spacing-lg) var(--spacing-lg);
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form-container > h3 {
-  font-weight: 500;
-  margin-bottom: 15px;
-  font-size: 1.3rem;
-} 
-
-.form-container > form {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
+.form-container h3 {
+	font-weight: 500;
+	margin-bottom: var(--spacing-md);
+	font-size: clamp(1.1rem, 2.5vw, 1.3rem);
 }
 
-.form-container > form > input {
-  background-color: #374151;
-  color: aliceblue;
-  border: 1px solid #4b5563;
-  border-radius: 10px;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.25rem;
-  padding: 12px 15px;
-  flex: 1;
-  transition: border-color 0.3s, box-shadow 0.3s;
+.form-container form {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-md);
+	flex-wrap: wrap;
 }
 
-.form-container > form > input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #3b82f6;
-  border-color: #3b82f6;
+.form-container input {
+	background-color: var(--bg-tertiary);
+	color: var(--text-primary);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-md);
+	font-family: inherit;
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	padding: 0.75rem var(--spacing-md);
+	flex: 1;
+	min-width: 200px;
+	transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.form-container > form > input::placeholder {
-  color: #9ca3af;
+.form-container input:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--accent-primary);
+	border-color: var(--accent-primary);
 }
 
-.form-container > form > button {
-  margin: 0;
-  background-color: #3b82f6;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.2rem;
-  padding: 12px 20px;
-  border-radius: 10px;
-  border: 0;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.form-container input::placeholder {
+	color: var(--text-muted);
 }
 
-.form-container > form > button:hover {
-  background-color: #2563eb;
+.form-container button {
+	margin: 0;
+	background-color: var(--accent-primary);
+	color: white;
+	font-family: inherit;
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	padding: 0.75rem clamp(1rem, 3vw, 1.25rem);
+	border-radius: var(--radius-md);
+	border: 0;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	white-space: nowrap;
 }
 
-.form-container > form > button:active {
-  background-color: #1d4ed8;
-  transform: translateY(1px);
+.form-container button:hover {
+	background-color: var(--accent-hover);
 }
 
-.footer{
-  position:absolute;
-  display: flex;
-  justify-content: center;
-  background-color: #1f2937;
-  color: whitesmoke;
-  width: 100vw;
-  bottom: 0;
+.form-container button:active {
+	background-color: var(--accent-active);
+	transform: translateY(1px);
 }
 
-.footer > span{
- opacity: 0.6;
- padding: 7px;
+/* Responsive footer */
+.footer {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+	width: 100%;
+	bottom: 0;
+}
+
+.footer span {
+	opacity: 0.6;
+	padding: var(--spacing-xs);
+	font-size: 0.9rem;
+}
+
+/* Media Queries for better responsiveness */
+@media (max-width: 768px) {
+	.puzzle-container {
+		width: 90%;
+		height: 70vh;
+	}
+
+	.form-container form {
+		flex-direction: column;
+	}
+
+	.form-container input,
+	.form-container button {
+		width: 100%;
+	}
+
+	header .button-container {
+		margin-right: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.puzzle-container h2 {
+		font-size: 1.2rem;
+		padding: var(--spacing-md);
+	}
+
+	.puzzle-content {
+		margin: var(--spacing-xs) var(--spacing-md) var(--spacing-md);
+		padding: var(--spacing-md);
+	}
+
+	.button-container button {
+		padding: 0.3rem 0.8rem;
+		font-size: 0.9rem;
+	}
 }
