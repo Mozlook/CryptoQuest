@@ -36,7 +36,7 @@ function App() {
 		};
 		setTekst("");
 		try {
-			const response = await fetch("http://127.0.0.1:8000/api/sprawdz/", {
+			const response = await fetch("http://209.38.250.130/api/sprawdz/", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

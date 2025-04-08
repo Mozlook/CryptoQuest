@@ -13,7 +13,7 @@ export default function IssueForm({ setIsIssueFormOpen }) {
 		};
 
 		try {
-			const response = await fetch("http://127.0.0.1:8000/api/bledy/", {
+			const response = await fetch("http://209.38.250.130/api/bledy/", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
