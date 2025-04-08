@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function SubmitForm({ checkAnswer, setTekst }) {
+export default function SubmitForm({ checkAnswer, setTekst, tekst }) {
 	const handleChange = (e) => {
-		setTekst(e.target.value); // Ustawiamy tekst z formularza
+		setTekst(e.target.value);
 	};
 
 	return (
@@ -14,6 +14,7 @@ export default function SubmitForm({ checkAnswer, setTekst }) {
 					type="text"
 					id="tekst"
 					name="tekst"
+					value={tekst}
 					onChange={handleChange}
 					required
 				/>

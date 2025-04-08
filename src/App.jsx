@@ -4,14 +4,13 @@ import SubmitForm from "./components/SubmitForm";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import IssueForm from "./components/IssueForm";
+import "./index.css";
 
 const DynamicComponent = ({ puzzleId }) => {
 	const Component = lazy(() =>
 		import(
 			/* @vite-ignore */ `./components/puzzles/Puzzle${puzzleId}.jsx`
-		).catch(() => ({
-			default: () => <div>Nie znaleziono komponentu</div>,
-		}))
+		).catch(() => import(/* @vite-ignore */ `./components/puzzles/Puzzle0.jsx`))
 	);
 
 	return (
@@ -25,23 +24,21 @@ function App() {
 	const [puzzleId, setPuzzleId] = useState(1);
 	const [isAboutOpen, setIsAboutOpen] = useState(false);
 	const [isIssueFormOpen, setIsIssueFormOpen] = useState(false);
-	const [wynik, setWynik] = useState(""); // Stan do wyświetlania wyniku
-	const [tekst, setTekst] = useState(""); // Stan do przechowywania tekstu odpowiedzi
-
+	const [wynik, setWynik] = useState("");
+	const [tekst, setTekst] = useState("");
 	const memoizedPuzzle = useMemo(
 		() => <DynamicComponent puzzleId={puzzleId} />,
 		[puzzleId]
 	);
 
-	// Funkcja do sprawdzania odpowiedzi
 	const checkAnswer = async (e) => {
 		e.preventDefault();
 
 		const requestData = {
 			numer: parseInt(puzzleId),
-			tekst: tekst, // Używamy stanu tekstu
+			tekst: tekst,
 		};
-
+		setTekst("");
 		try {
 			const response = await fetch("http://127.0.0.1:8000/api/sprawdz/", {
 				method: "POST",
@@ -58,13 +55,13 @@ function App() {
 				if (data.result === true) {
 					setPuzzleId((prevPuzzleId) => prevPuzzleId + 1);
 				} else {
-					setWynik("Odpowiedź jest niepoprawna.");
+					console.log("zla odpowiedz");
 				}
 			} else {
-				setWynik("Błąd: " + data.error);
+				console.log("Błąd: " + data.error);
 			}
 		} catch (error) {
-			setWynik("Wystąpił błąd podczas wysyłania zapytania.");
+			console.log("Wystąpił błąd podczas wysyłania zapytania.");
 		}
 	};
 
@@ -76,11 +73,10 @@ function App() {
 				setPuzzleId={setPuzzleId}
 			/>
 			{memoizedPuzzle}
-			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} />
+			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
 			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
-			{wynik && <div>{wynik}</div>} {/* Wyświetlamy wynik */}
 		</main>
 	);
 }
