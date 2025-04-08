@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState, useMemo } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import Header from "./components/Header";
 import SubmitForm from "./components/SubmitForm";
 import Footer from "./components/Footer";
@@ -6,11 +6,11 @@ import About from "./components/About";
 import IssueForm from "./components/IssueForm";
 import "./index.css";
 
-const DynamicComponent = ({ puzzleId }) => {
+const DynamicComponent = React.memo(({ puzzleId }) => {
 	const Component = lazy(() =>
-		import(
-			/* @vite-ignore */ `./components/puzzles/Puzzle${puzzleId}.jsx`
-		).catch(() => import(/* @vite-ignore */ `./components/puzzles/Puzzle0.jsx`))
+		import(`./components/puzzles/Puzzle${puzzleId}.jsx`).catch(() =>
+			import(`./components/puzzles/Puzzle0.jsx`)
+		)
 	);
 
 	return (
@@ -18,7 +18,7 @@ const DynamicComponent = ({ puzzleId }) => {
 			<Component />
 		</Suspense>
 	);
-};
+});
 
 function App() {
 	const [puzzleId, setPuzzleId] = useState(1);
@@ -26,10 +26,6 @@ function App() {
 	const [isIssueFormOpen, setIsIssueFormOpen] = useState(false);
 	const [wynik, setWynik] = useState("");
 	const [tekst, setTekst] = useState("");
-	const memoizedPuzzle = useMemo(
-		() => <DynamicComponent puzzleId={puzzleId} />,
-		[puzzleId]
-	);
 
 	const checkAnswer = async (e) => {
 		e.preventDefault();
@@ -55,7 +51,7 @@ function App() {
 				if (data.result === true) {
 					setPuzzleId((prevPuzzleId) => prevPuzzleId + 1);
 				} else {
-					console.log("zla odpowiedz");
+					console.log("Zła odpowiedź");
 				}
 			} else {
 				console.log("Błąd: " + data.error);
@@ -72,7 +68,7 @@ function App() {
 				setIsIssueFormOpen={setIsIssueFormOpen}
 				setPuzzleId={setPuzzleId}
 			/>
-			{memoizedPuzzle}
+			<DynamicComponent puzzleId={puzzleId} />
 			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
