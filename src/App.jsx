@@ -36,7 +36,7 @@ function App() {
 		};
 		setTekst("");
 		try {
-			const response = await fetch("http://209.38.250.130/api/sprawdz/", {
+			const response = await fetch("https://www.mmozoluk.com/api/sprawdz/", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
