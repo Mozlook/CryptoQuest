@@ -18,7 +18,7 @@ export default function SubmitForm({ checkAnswer, setTekst, tekst }) {
 					onChange={handleChange}
 					required
 				/>
-				<button type="submit">Sprawdź odpowiedź</button>
+				<button type="submit">Submit answer</button>
 			</form>
 		</div>
 	);
