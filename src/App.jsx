@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useState, useEffect } from "react";
 import Header from "./components/Header";
 import SubmitForm from "./components/SubmitForm";
 import Footer from "./components/Footer";
@@ -27,7 +27,7 @@ const getFromLocalStorage = (key) => {
 const DynamicComponent = React.memo(({ puzzleId }) => {
 	const Component = lazy(() =>
 		import(`./components/puzzles/Puzzle${puzzleId}.jsx`).catch(() =>
-			import(`./components/puzzles/Puzzle0.jsx`)
+			import(`./components/puzzles/PuzzleFinal.jsx`)
 		)
 	);
 
@@ -47,7 +47,42 @@ function App() {
 	const [isIssueFormOpen, setIsIssueFormOpen] = useState(false);
 	const [wynik, setWynik] = useState("");
 	const [tekst, setTekst] = useState("");
+	const [csrftoken, setCsrftoken] = useState("");
 
+	useEffect(() => {
+		const fetchCsrfToken = async () => {
+			try {
+				await fetch("https://www.mmozoluk.com/api/get-csrf/", {
+					method: "GET",
+					credentials: "include",
+				});
+
+				const token = getCookie("csrftoken");
+				if (token) {
+					setCsrftoken(token);
+				} else {
+					console.error("Brak tokena CSRF w ciasteczkach!");
+				}
+			} catch (error) {
+				console.error("Błąd podczas pobierania tokena CSRF:", error);
+			}
+		};
+
+		fetchCsrfToken();
+	}, []);
+
+	function getCookie(name) {
+		const cookies = document.cookie.split(";");
+		for (let cookie of cookies) {
+			const [cookieName, cookieValue] = cookie.trim().split("=");
+			if (cookieName === name) {
+				return decodeURIComponent(cookieValue);
+			}
+		}
+		return null;
+	}
+
+	console.log(csrftoken);
 	React.useEffect(() => {
 		saveToLocalStorage("puzzleId", puzzleId);
 	}, [puzzleId]);

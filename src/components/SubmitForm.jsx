@@ -9,7 +9,7 @@ export default function SubmitForm({ checkAnswer, setTekst, tekst }) {
 		<div className="form-container">
 			<h3>Submit Your Answer:</h3>
 			<form onSubmit={checkAnswer}>
-				<label htmlFor="tekst">Wpisz odpowiedź:</label>
+				<label htmlFor="tekst">Answer here:</label>
 				<input
 					type="text"
 					id="tekst"
