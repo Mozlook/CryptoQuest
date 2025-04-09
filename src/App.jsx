@@ -108,7 +108,9 @@ function App() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					"X-CSRFToken": csrftoken, // Dodaj token CSRF do nagłówków
 				},
+				credentials: "include", // Wymagane do przesyłania ciasteczek
 				body: JSON.stringify(requestData),
 			});
 
