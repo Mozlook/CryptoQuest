@@ -38,6 +38,17 @@ const DynamicComponent = React.memo(({ puzzleId }) => {
 	);
 });
 
+function getCookie(name) {
+	const cookies = document.cookie.split(";");
+	for (let cookie of cookies) {
+		const [cookieName, cookieValue] = cookie.trim().split("=");
+		if (cookieName === name) {
+			return decodeURIComponent(cookieValue);
+		}
+	}
+	return null;
+}
+
 function App() {
 	const [puzzleId, setPuzzleId] = useState(() => {
 		const savedPuzzleId = getFromLocalStorage("puzzleId");
@@ -52,20 +63,25 @@ function App() {
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
 			try {
-				const response = await fetch("https://www.mmozoluk.com/api/get-csrf/", {
-					method: "GET",
-					credentials: "include", // Wymagane do przesyłania ciasteczek
-					headers: {
-						Accept: "application/json",
-					},
-				});
+				let token = getCookie("csrftoken");
+				if (!token) {
+					const response = await fetch(
+						"https://www.mmozoluk.com/api/get-csrf/",
+						{
+							method: "GET",
+							credentials: "include",
+							headers: {
+								Accept: "application/json",
+							},
+						}
+					);
 
-				if (!response.ok) {
-					throw new Error("Nie udało się pobrać tokena CSRF");
+					if (!response.ok) {
+						throw new Error("Nie udało się pobrać tokena CSRF");
+					}
+					await new Promise((resolve) => setTimeout(resolve, 100));
+					token = getCookie("csrftoken");
 				}
-				await new Promise((resolve) => setTimeout(resolve, 100));
-				// Token jest teraz w ciasteczkach przeglądarki
-				const token = getCookie("csrftoken");
 				if (token) {
 					setCsrftoken(token);
 				} else {
@@ -79,24 +95,17 @@ function App() {
 		fetchCsrfToken();
 	}, []);
 
-	function getCookie(name) {
-		const cookies = document.cookie.split(";");
-		for (let cookie of cookies) {
-			const [cookieName, cookieValue] = cookie.trim().split("=");
-			if (cookieName === name) {
-				return decodeURIComponent(cookieValue);
-			}
-		}
-		return null;
-	}
-
-	console.log(csrftoken);
 	React.useEffect(() => {
 		saveToLocalStorage("puzzleId", puzzleId);
 	}, [puzzleId]);
 
 	const checkAnswer = async (e) => {
 		e.preventDefault();
+
+		if (!csrftoken) {
+			console.error("Brak tokena CSRF!");
+			return;
+		}
 
 		const requestData = {
 			numer: parseInt(puzzleId),
