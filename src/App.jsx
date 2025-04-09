@@ -41,15 +41,16 @@ const DynamicComponent = React.memo(({ puzzleId }) => {
 function getCookie(name) {
 	if (typeof document === "undefined") return null;
 
-	const cookieString = document.cookie;
-	const cookies = cookieString.split("; ");
+	const value = `; ${document.cookie}`;
+	const parts = value.split(`; ${name}=`);
 
-	for (const cookie of cookies) {
-		const [cookieName, ...cookieValueParts] = cookie.split("=");
-		if (cookieName === name) {
-			return decodeURIComponent(cookieValueParts.join("="));
-		}
+	if (parts.length === 2) {
+		const cookieValue = parts.pop().split(";").shift();
+		console.log(`Found cookie ${name} with value:`, cookieValue);
+		return cookieValue;
 	}
+
+	console.log(`Cookie ${name} not found in:`, document.cookie);
 	return null;
 }
 
