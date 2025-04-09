@@ -11,10 +11,18 @@ export default function Login({ setIsLoginFormOpen }) {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post("https://www.mmozoluk.com/api/login/", {
-				username,
-				password,
-			});
+			const response = await axios.post(
+				"https://www.mmozoluk.com/api/login/",
+				{
+					username,
+					password,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
 
 			// Zapisz tokeny w localStorage
 			localStorage.setItem("access_token", response.data.access);
