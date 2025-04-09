@@ -68,31 +68,27 @@ function App() {
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
 			try {
-				let token = getCookie("csrftoken");
-				if (!token) {
-					const response = await fetch(
-						"https://www.mmozoluk.com/api/get-csrf/",
-						{
-							method: "GET",
-							credentials: "include",
-							headers: { Accept: "application/json" },
-						}
-					);
+				const response = await fetch("https://www.mmozoluk.com/api/get-csrf/", {
+					method: "GET",
+					credentials: "include",
+					headers: {
+						Accept: "application/json",
+					},
+				});
 
-					if (!response.ok) {
-						throw new Error(`HTTP error! status: ${response.status}`);
-					}
-
-					await new Promise((resolve) => setTimeout(resolve, 200));
-					token = getCookie("csrftoken");
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
 				}
+
+				const data = await response.json();
+
+				const token = data.csrftoken;
 
 				if (token) {
 					setCsrftoken(token);
-					console.log("Successfully set CSRF token:", token);
+					console.log("CSRF token received:", token);
 				} else {
-					console.warn("CSRF token not found in cookies after request");
-					console.log("Current cookies:", document.cookie);
+					console.error("No CSRF token in response");
 				}
 			} catch (error) {
 				console.error("Error fetching CSRF token:", error);
