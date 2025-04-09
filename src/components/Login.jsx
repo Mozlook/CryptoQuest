@@ -20,7 +20,7 @@ export default function Login({ setIsLoginFormOpen }) {
 			localStorage.setItem("access_token", response.data.access);
 			localStorage.setItem("refresh_token", response.data.refresh);
 		} catch (err) {
-			setError("Invalid credentials");
+			console.log(err);
 		}
 	};
 
