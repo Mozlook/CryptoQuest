@@ -63,7 +63,7 @@ function App() {
 				if (!response.ok) {
 					throw new Error("Nie udało się pobrać tokena CSRF");
 				}
-
+				await new Promise((resolve) => setTimeout(resolve, 100));
 				// Token jest teraz w ciasteczkach przeglądarki
 				const token = getCookie("csrftoken");
 				if (token) {
