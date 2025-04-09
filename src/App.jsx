@@ -52,11 +52,19 @@ function App() {
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
 			try {
-				await fetch("https://www.mmozoluk.com/api/get-csrf/", {
+				const response = await fetch("https://www.mmozoluk.com/api/get-csrf/", {
 					method: "GET",
-					credentials: "include",
+					credentials: "include", // Wymagane do przesyłania ciasteczek
+					headers: {
+						Accept: "application/json",
+					},
 				});
 
+				if (!response.ok) {
+					throw new Error("Nie udało się pobrać tokena CSRF");
+				}
+
+				// Token jest teraz w ciasteczkach przeglądarki
 				const token = getCookie("csrftoken");
 				if (token) {
 					setCsrftoken(token);
