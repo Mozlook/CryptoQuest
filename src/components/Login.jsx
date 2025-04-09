@@ -1,16 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import "../Styles/IssueForm.css";
 
-export default function Login() {
+export default function Login({ setIsLoginFormOpen }) {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState(null);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		try {
+			const response = await axios.post("httsp://www.mmozoluk.com/api/login/", {
+				username,
+				password,
+			});
+
+			// Zapisz tokeny w localStorage
+			localStorage.setItem("access_token", response.data.access);
+			localStorage.setItem("refresh_token", response.data.refresh);
+		} catch (err) {
+			setError("Invalid credentials");
+		}
+	};
+
 	return (
-		<div className="form-container">
-			<h3>Submit Your Answer:</h3>
-			<form onSubmit={checkAnswer}>
-				<label htmlFor="tekst">Login</label>
-				<input type="text" id="login" name="login" required />
-				<label htmlFor="password">Password</label>
-				<input type="password" id="password" name="password" required />
-				<button type="submit">Submit answer</button>
-			</form>
+		<div className="overlay" onClick={() => setIsLoginFormOpen(false)}>
+			<div
+				className="issue-form-container"
+				onClick={(e) => e.stopPropagation()}
+			>
+				<p>Report an Issue</p>
+				<form onSubmit={handleSubmit}>
+					<label>Username:</label>
+					<input
+						type="text"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+					<label>Password:</label>
+					<input
+						type="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					{error && <div>{error}</div>}
+					<div className="buttons-container">
+						<button className="submit-issue" type="submit">
+							Login
+						</button>
+						<button
+							className="cancel"
+							onClick={() => setIsLoginFormOpen(false)}
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 }
