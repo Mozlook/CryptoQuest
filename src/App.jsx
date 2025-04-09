@@ -39,11 +39,15 @@ const DynamicComponent = React.memo(({ puzzleId }) => {
 });
 
 function getCookie(name) {
-	const cookies = document.cookie.split(";");
-	for (let cookie of cookies) {
-		const [cookieName, cookieValue] = cookie.trim().split("=");
+	if (typeof document === "undefined") return null;
+
+	const cookieString = document.cookie;
+	const cookies = cookieString.split("; ");
+
+	for (const cookie of cookies) {
+		const [cookieName, ...cookieValueParts] = cookie.split("=");
 		if (cookieName === name) {
-			return decodeURIComponent(cookieValue);
+			return decodeURIComponent(cookieValueParts.join("="));
 		}
 	}
 	return null;
@@ -70,25 +74,27 @@ function App() {
 						{
 							method: "GET",
 							credentials: "include",
-							headers: {
-								Accept: "application/json",
-							},
+							headers: { Accept: "application/json" },
 						}
 					);
 
 					if (!response.ok) {
-						throw new Error("Nie udało się pobrać tokena CSRF");
+						throw new Error(`HTTP error! status: ${response.status}`);
 					}
-					await new Promise((resolve) => setTimeout(resolve, 100));
+
+					await new Promise((resolve) => setTimeout(resolve, 200));
 					token = getCookie("csrftoken");
 				}
+
 				if (token) {
 					setCsrftoken(token);
+					console.log("Successfully set CSRF token:", token);
 				} else {
-					console.error("Brak tokena CSRF w ciasteczkach!");
+					console.warn("CSRF token not found in cookies after request");
+					console.log("Current cookies:", document.cookie);
 				}
 			} catch (error) {
-				console.error("Błąd podczas pobierania tokena CSRF:", error);
+				console.error("Error fetching CSRF token:", error);
 			}
 		};
 
@@ -117,9 +123,9 @@ function App() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"X-CSRFToken": csrftoken, // Dodaj token CSRF do nagłówków
+					"X-CSRFToken": csrftoken,
 				},
-				credentials: "include", // Wymagane do przesyłania ciasteczek
+				credentials: "include",
 				body: JSON.stringify(requestData),
 			});
 
