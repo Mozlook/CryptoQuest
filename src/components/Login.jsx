@@ -11,7 +11,7 @@ export default function Login({ setIsLoginFormOpen }) {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post("httsp://www.mmozoluk.com/api/login/", {
+			const response = await axios.post("https://www.mmozoluk.com/api/login/", {
 				username,
 				password,
 			});
