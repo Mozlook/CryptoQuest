@@ -29,23 +29,16 @@ export default function Login({ setIsRegisterFormOpen }) {
 				}
 			);
 
-			// Obsługuje odpowiedź, jeśli jest sukces
 			console.log("Rejestracja zakończona sukcesem: ", response.data);
-			// Możesz np. przekierować użytkownika do innej strony po udanej rejestracji:
-			// window.location.href = '/login';
 		} catch (err) {
-			// Obsługujemy błąd, wyświetlamy komunikat lub inne działania
 			if (err.response) {
-				// Jeśli odpowiedź serwera jest dostępna
-				console.log("Błąd w odpowiedzi serwera:", err.response.data);
-				console.log("Status błędu:", err.response.status);
-				// Możesz przekazać komunikat o błędzie do stanu komponentu i wyświetlić go użytkownikowi
+				const errors = err.response.data.errors;
+				setFormErrors(errors);
+				console.log("Błędy z serwera:", errors);
 			} else if (err.request) {
-				// Jeśli zapytanie zostało wysłane, ale brak odpowiedzi
 				console.log("Brak odpowiedzi od serwera:", err.request);
 			} else {
-				// Inne błędy, np. w kodzie axios
-				console.log("Błąd podczas wykonywania zapytania:", err.message);
+				console.log("Błąd podczas zapytania:", err.message);
 			}
 		}
 	};
