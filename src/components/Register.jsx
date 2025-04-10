@@ -10,6 +10,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const errors = none;
 		setFormErrors({});
 
 		try {
@@ -28,10 +29,10 @@ export default function Register({ setIsRegisterFormOpen }) {
 				}
 			);
 
-			console.log("Rejestracja zakończona sukcesem: ", response.data);
+			console.log(response.data);
 		} catch (err) {
 			if (err.response) {
-				const errors = err.response.data.errors;
+				errors = err.response.data.errors;
 				setFormErrors(errors);
 				console.log("Błędy z serwera:", errors);
 			} else if (err.request) {
@@ -59,7 +60,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 					{formErrors.username ? (
 						<span>{formErrors.username[0]}</span>
 					) : (
-						<span>cos</span>
+						<span></span>
 					)}
 					<label>Email:</label>
 					<input
