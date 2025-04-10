@@ -10,6 +10,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setFormErrors({});
 
 		try {
 			const response = await axios.post(
