@@ -42,51 +42,55 @@ export default function Register({ setIsRegisterFormOpen }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div>
-				<label>Username:</label>
-				<input
-					type="text"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-				{formErrors.username && <span>{formErrors.username[0]}</span>}
-			</div>
+		<div className="overlay" onClick={() => setIsRegisterFormOpen(false)}>
+			<div
+				className="issue-form-container"
+				onClick={(e) => e.stopPropagation()}
+			>
+				<p>Register</p>
+				<form onSubmit={handleSubmit}>
+					<label>Username:</label>
+					<input
+						type="text"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+					{formErrors.username && <span>{formErrors.username[0]}</span>}
+					<label>Email:</label>
+					<input
+						type="email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					{formErrors.email && <span>{formErrors.email[0]}</span>}
 
-			<div>
-				<label>Email:</label>
-				<input
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				{formErrors.email && <span>{formErrors.email[0]}</span>}
-			</div>
+					<label>Password:</label>
+					<input
+						type="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
 
-			<div>
-				<label>Password:</label>
-				<input
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+					<label>Confirm Password:</label>
+					<input
+						type="password"
+						value={password2}
+						onChange={(e) => setPassword2(e.target.value)}
+					/>
+					{formErrors.password && <span>{formErrors.password[0]}</span>}
+					<div className="buttons-container">
+						<button type="submit" className="submit-issue">
+							Register
+						</button>
+						<button
+							className="cancel"
+							onClick={() => setIsRegisterFormOpen(false)}
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
 			</div>
-
-			<div>
-				<label>Confirm Password:</label>
-				<input
-					type="password"
-					value={password2}
-					onChange={(e) => setPassword2(e.target.value)}
-				/>
-			</div>
-
-			<button type="submit" className="submit-issue">
-				Register
-			</button>
-			<button className="cancel" onClick={() => setIsRegisterFormOpen(false)}>
-				Cancel
-			</button>
-		</form>
+		</div>
 	);
 }
