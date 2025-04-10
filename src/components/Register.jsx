@@ -32,7 +32,7 @@ export default function Login({ setIsRegisterFormOpen }) {
 			console.log("Rejestracja zakończona sukcesem: ", response.data);
 		} catch (err) {
 			if (err.response) {
-				const errors = err.response.data.errors;
+				const errors = err.response.data.errors.errors;
 				setFormErrors(errors);
 				console.log("Błędy z serwera:", errors);
 			} else if (err.request) {
