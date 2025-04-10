@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/IssueForm.css";
 
-export default function Login({ setIsLoginFormOpen }) {
+export default function Login({ setIsRegisterFormOpen }) {
 	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [password2, setPassword2] = useState("");
+
 	const [error, setError] = useState(null);
 
 	const handleSubmit = async (e) => {
@@ -12,10 +15,12 @@ export default function Login({ setIsLoginFormOpen }) {
 
 		try {
 			const response = await axios.post(
-				"https://www.mmozoluk.com/api/login/",
+				"https://www.mmozoluk.com/api/register/",
 				{
 					username,
+					email,
 					password,
+					password2,
 				},
 				{
 					headers: {
@@ -23,17 +28,13 @@ export default function Login({ setIsLoginFormOpen }) {
 					},
 				}
 			);
-
-			// Zapisz tokeny w localStorage
-			localStorage.setItem("access_token", response.data.access);
-			localStorage.setItem("refresh_token", response.data.refresh);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
 	return (
-		<div className="overlay" onClick={() => setIsLoginFormOpen(false)}>
+		<div className="overlay" onClick={() => setIsRegisterFormOpen(false)}>
 			<div
 				className="issue-form-container"
 				onClick={(e) => e.stopPropagation()}
@@ -46,11 +47,23 @@ export default function Login({ setIsLoginFormOpen }) {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
+					<label>Email:</label>
+					<input
+						type="text"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
 					<label>Password:</label>
 					<input
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+					/>
+					<label>Password2:</label>
+					<input
+						type="password"
+						value={password2}
+						onChange={(e) => setPassword2(e.target.value)}
 					/>
 					{error && <div>{error}</div>}
 					<div className="buttons-container">
@@ -59,7 +72,7 @@ export default function Login({ setIsLoginFormOpen }) {
 						</button>
 						<button
 							className="cancel"
-							onClick={() => setIsLoginFormOpen(false)}
+							onClick={() => setIsRegisterFormOpen(false)}
 						>
 							Cancel
 						</button>

@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import IssueForm from "./components/IssueForm";
 import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
 import "./index.css";
 
 const saveToLocalStorage = (key, data) => {
@@ -62,7 +63,8 @@ function App() {
 	});
 	const [isAboutOpen, setIsAboutOpen] = useState(false);
 	const [isIssueFormOpen, setIsIssueFormOpen] = useState(false);
-	const [isLoginFromOpen, setIsLoginFormOpen] = useState(false);
+	const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
+	const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
 	const [wynik, setWynik] = useState("");
 	const [tekst, setTekst] = useState("");
 	const [csrftoken, setCsrftoken] = useState("");
@@ -152,13 +154,17 @@ function App() {
 				setIsIssueFormOpen={setIsIssueFormOpen}
 				setPuzzleId={setPuzzleId}
 				setIsLoginFormOpen={setIsLoginFormOpen}
+				setIsRegisterFormOpen={setIsRegisterFormOpen}
 			/>
 			<DynamicComponent puzzleId={puzzleId} />
 			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
 			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
-			{isLoginFromOpen && <Login setIsLoginFormOpen={setIsLoginFormOpen} />}
+			{isLoginFormOpen && <Login setIsLoginFormOpen={setIsLoginFormOpen} />}
+			{isRegisterFormOpen && (
+				<Register setIsRegisterFormOpen={setIsRegisterFormOpen} />
+			)}
 		</main>
 	);
 }

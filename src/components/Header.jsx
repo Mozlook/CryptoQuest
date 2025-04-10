@@ -3,6 +3,7 @@ export default function Header({
 	setIsIssueFormOpen,
 	setPuzzleId,
 	setIsLoginFormOpen,
+	setIsRegisterFormOpen,
 }) {
 	return (
 		<header>
@@ -13,7 +14,7 @@ export default function Header({
 				<button onClick={() => setIsIssueFormOpen(true)}>
 					<i className="fas fa-bug"></i>Report Issue
 				</button>
-				<button onClick={() => setIsLoginFormOpen(true)}>Login</button>
+				<button onClick={() => setIsRegisterFormOpen(true)}>Login</button>
 				{/* <button onClick={() => setPuzzleId(prev => prev + 1)}><i className="fas fa-cog"></i>PlaceHolder</button> */}
 			</div>
 		</header>
