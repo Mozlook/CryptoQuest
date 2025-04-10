@@ -58,7 +58,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 					{formErrors.username ? (
 						<span>{formErrors.username[0]}</span>
 					) : (
-						<span></span>
+						<span>cos</span>
 					)}
 					<label>Email:</label>
 					<input
