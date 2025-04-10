@@ -10,7 +10,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const errors = null;
+		let errors = null;
 		setFormErrors({});
 
 		try {
