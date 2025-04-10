@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const RegistrationForm = () => {
+export default function Register({ setIsRegisterFormOpen }) {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -81,9 +81,12 @@ const RegistrationForm = () => {
 				/>
 			</div>
 
-			<button type="submit">Register</button>
+			<button type="submit" className="submit-issue">
+				Register
+			</button>
+			<button className="cancel" onClick={() => setIsRegisterFormOpen(false)}>
+				Cancel
+			</button>
 		</form>
 	);
-};
-
-export default RegistrationForm;
+}
