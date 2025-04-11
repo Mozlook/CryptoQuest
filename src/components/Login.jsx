@@ -24,6 +24,7 @@ export default function Login({ setIsLoginFormOpen }) {
 				}
 			);
 			console.log(response.data);
+			sessionStorage.setItem("authToken", response.data.token);
 			setIsLoginFormOpen(false);
 		} catch (err) {
 			console.log(err.response);
