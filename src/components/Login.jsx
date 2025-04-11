@@ -23,17 +23,14 @@ export default function Login({ setIsLoginFormOpen }) {
 					},
 				}
 			);
-
-			// Zapisz tokeny w localStorage
-			localStorage.setItem("access_token", response.data.access);
-			localStorage.setItem("refresh_token", response.data.refresh);
 		} catch (err) {
+			setError(err);
 			console.log(err);
 		}
 	};
 
 	return (
-		<div className="overlay" onClick={() => setIsLoginFormOpen(false)}>
+		<div className="overlay">
 			<div
 				className="issue-form-container"
 				onClick={(e) => e.stopPropagation()}
@@ -52,7 +49,7 @@ export default function Login({ setIsLoginFormOpen }) {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					{error && <div>{error}</div>}
+					{error && <div>{error.error}</div>}
 					<div className="buttons-container">
 						<button className="submit-issue" type="submit">
 							Login
