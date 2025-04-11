@@ -24,6 +24,7 @@ export default function Login({ setIsLoginFormOpen }) {
 				}
 			);
 			console.log(response.data);
+			setIsLoginFormOpen(false);
 		} catch (err) {
 			console.log(err.response);
 			if (err.response && err.response.data) {

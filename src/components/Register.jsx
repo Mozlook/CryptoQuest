@@ -30,6 +30,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 			);
 
 			console.log(response.data);
+			setIsRegisterFormOpen(false);
 		} catch (err) {
 			if (err.response) {
 				errors = err.response.data.errors;
