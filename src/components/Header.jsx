@@ -5,6 +5,7 @@ export default function Header({
 	setIsLoginFormOpen,
 	setIsRegisterFormOpen,
 }) {
+	const token = sessionStorage.getItem("authToken");
 	return (
 		<header>
 			<div className="button-container">
@@ -14,9 +15,14 @@ export default function Header({
 				<button onClick={() => setIsIssueFormOpen(true)}>
 					<i className="fas fa-bug"></i>Report Issue
 				</button>
-				if (token)
-				{<button onClick={() => sessionStorage.clear()}>Logout</button>} else
-				{<button onClick={() => setIsLoginFormOpen(true)}>Login</button>}
+				{token ? (
+					<button onClick={() => sessionStorage.removeItem("authToken")}>
+						Logout
+					</button>
+				) : (
+					<button onClick={() => setIsLoginFormOpen(true)}>Login</button>
+				)}
+				<button onClick={() => setIsLoginFormOpen(true)}>Login</button>
 				{/* <button onClick={() => setPuzzleId(prev => prev + 1)}><i className="fas fa-cog"></i>PlaceHolder</button> */}
 			</div>
 		</header>
