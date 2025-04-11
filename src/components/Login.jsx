@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/IssueForm.css";
 
-export default function Login({ setIsLoginFormOpen }) {
+export default function Login({ setIsLoginFormOpen, setIsLoggedIn }) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
@@ -25,6 +25,7 @@ export default function Login({ setIsLoginFormOpen }) {
 			);
 			console.log(response.data);
 			sessionStorage.setItem("authToken", response.data.token);
+			setIsLoggedIn(true);
 			setIsLoginFormOpen(false);
 		} catch (err) {
 			console.log(err.response);

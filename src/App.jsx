@@ -68,6 +68,9 @@ function App() {
 	const [wynik, setWynik] = useState("");
 	const [tekst, setTekst] = useState("");
 	const [csrftoken, setCsrftoken] = useState("");
+	const [isLoggedIn, setIsLoggedIn] = useState(
+		!!sessionStorage.getItem("authToken")
+	);
 
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
@@ -155,13 +158,20 @@ function App() {
 				setPuzzleId={setPuzzleId}
 				setIsLoginFormOpen={setIsLoginFormOpen}
 				setIsRegisterFormOpen={setIsRegisterFormOpen}
+				setIsLoggedIn={setIsLoggedIn}
+				isLoggedIn={isLoggedIn}
 			/>
 			<DynamicComponent puzzleId={puzzleId} />
 			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
 			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
-			{isLoginFormOpen && <Login setIsLoginFormOpen={setIsLoginFormOpen} />}
+			{isLoginFormOpen && (
+				<Login
+					setIsLoginFormOpen={setIsLoginFormOpen}
+					setIsLoggedIn={setIsLoggedIn}
+				/>
+			)}
 			{isRegisterFormOpen && (
 				<Register setIsRegisterFormOpen={setIsRegisterFormOpen} />
 			)}
