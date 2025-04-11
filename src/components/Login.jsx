@@ -30,42 +30,41 @@ export default function Login({ setIsLoginFormOpen }) {
 				setError(err.response.data);
 			}
 		}
-
-		return (
-			<div className="overlay">
-				<div
-					className="issue-form-container"
-					onClick={(e) => e.stopPropagation()}
-				>
-					<p>Login</p>
-					<form onSubmit={handleSubmit}>
-						<label>Username:</label>
-						<input
-							type="text"
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-						/>
-						<label>Password:</label>
-						<input
-							type="password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						{error && <div>{error.error}</div>}
-						<div className="buttons-container">
-							<button className="submit-issue" type="submit">
-								Login
-							</button>
-							<button
-								className="cancel"
-								onClick={() => setIsLoginFormOpen(false)}
-							>
-								Cancel
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		);
 	};
+	return (
+		<div className="overlay">
+			<div
+				className="issue-form-container"
+				onClick={(e) => e.stopPropagation()}
+			>
+				<p>Login</p>
+				<form onSubmit={handleSubmit}>
+					<label>Username:</label>
+					<input
+						type="text"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+					/>
+					<label>Password:</label>
+					<input
+						type="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+					{error && <div>{error.error}</div>}
+					<div className="buttons-container">
+						<button className="submit-issue" type="submit">
+							Login
+						</button>
+						<button
+							className="cancel"
+							onClick={() => setIsLoginFormOpen(false)}
+						>
+							Cancel
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
 }
