@@ -23,9 +23,9 @@ export default function Login({ setIsLoginFormOpen }) {
 					},
 				}
 			);
+			console.log(response.data);
 		} catch (err) {
-			setError(err);
-			console.log(err);
+			console.log(err.response);
 		}
 	};
 
