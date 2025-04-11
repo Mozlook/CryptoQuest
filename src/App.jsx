@@ -75,7 +75,7 @@ function App() {
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
 			try {
-				const response = await fetch("https://www.mmozoluk.com/api/get-csrf/", {
+				const response = await fetch("https://api.mmozoluk.com/api/get-csrf/", {
 					method: "GET",
 					credentials: "include",
 					headers: {
