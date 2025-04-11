@@ -13,7 +13,7 @@ export default function IssueForm({ setIsIssueFormOpen }) {
 		};
 
 		try {
-			const response = await fetch("https://www.mmozoluk.com/api/bledy/", {
+			const response = await fetch("https://api.mmozoluk.com/api/bledy/", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

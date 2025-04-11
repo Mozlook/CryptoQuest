@@ -12,7 +12,7 @@ export default function Login({ setIsLoginFormOpen, setIsLoggedIn }) {
 
 		try {
 			const response = await axios.post(
-				"https://www.mmozoluk.com/api/login/",
+				"https://api.mmozoluk.com/api/login/",
 				{
 					username,
 					password,

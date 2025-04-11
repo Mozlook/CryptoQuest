@@ -15,7 +15,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 
 		try {
 			const response = await axios.post(
-				"https://www.mmozoluk.com/api/register/",
+				"https://api.mmozoluk.com/api/register/",
 				{
 					username,
 					email,
