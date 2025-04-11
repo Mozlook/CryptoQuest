@@ -147,6 +147,7 @@ function App() {
 			}
 		} catch (error) {
 			console.log("Wystąpił błąd podczas wysyłania zapytania.");
+			console.log(error);
 		}
 	};
 
