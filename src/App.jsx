@@ -6,6 +6,7 @@ import About from "./components/About";
 import IssueForm from "./components/IssueForm";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
+import LoginMain from "./components/LoginMain.jsx";
 import "./index.css";
 
 const saveToLocalStorage = (key, data) => {
@@ -65,7 +66,6 @@ function App() {
 	const [isIssueFormOpen, setIsIssueFormOpen] = useState(false);
 	const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
 	const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
-	const [wynik, setWynik] = useState("");
 	const [tekst, setTekst] = useState("");
 	const [csrftoken, setCsrftoken] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(
@@ -140,13 +140,13 @@ function App() {
 				if (data.result === true) {
 					setPuzzleId((prevPuzzleId) => prevPuzzleId + 1);
 				} else {
-					console.log("Zła odpowiedź");
+					console.log("Wrong Answer");
 				}
 			} else {
-				console.log("Błąd: " + data.error);
+				console.log("Error: " + data.error);
 			}
 		} catch (error) {
-			console.log("Wystąpił błąd podczas wysyłania zapytania.");
+			console.log("Error while sending request");
 			console.log(error);
 		}
 	};
@@ -162,18 +162,22 @@ function App() {
 				setIsLoggedIn={setIsLoggedIn}
 				isLoggedIn={isLoggedIn}
 			/>
-			{!isLoggedIn && puzzleId > 1 ? (
-				<span>Login to play further</span>
-			) : (
+			{!isLoggedIn && puzzleId > 1 && (
 				<>
-					<DynamicComponent puzzleId={puzzleId} />
-					<SubmitForm
-						checkAnswer={checkAnswer}
-						setTekst={setTekst}
-						tekst={tekst}
+					<LoginMain
+						setIsRegisterFormOpen={setIsRegisterFormOpen}
+						setIsLoggedIn={setIsLoggedIn}
 					/>
 				</>
 			)}
+			<>
+				<DynamicComponent puzzleId={puzzleId} />
+				<SubmitForm
+					checkAnswer={checkAnswer}
+					setTekst={setTekst}
+					tekst={tekst}
+				/>
+			</>
 
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
@@ -182,6 +186,7 @@ function App() {
 				<Login
 					setIsLoginFormOpen={setIsLoginFormOpen}
 					setIsLoggedIn={setIsLoggedIn}
+					setIsRegisterFormOpen={setIsRegisterFormOpen}
 				/>
 			)}
 			{isRegisterFormOpen && (

@@ -45,7 +45,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 	};
 
 	return (
-		<div className="overlay">
+		<div className="reg-overlay">
 			<div
 				className="issue-form-container"
 				onClick={(e) => e.stopPropagation()}
@@ -86,6 +86,7 @@ export default function Register({ setIsRegisterFormOpen }) {
 							Register
 						</button>
 						<button
+							type="button"
 							className="cancel"
 							onClick={() => setIsRegisterFormOpen(false)}
 						>

@@ -11,14 +11,19 @@
 	backdrop-filter: blur(4px);
 	z-index: 1000;
 }
-
+.reg-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .issue-form-container {
-	background: rgba(
-		31,
-		41,
-		55,
-		0.95
-	); /* var(--bg-secondary) z lekką przezroczystością */
+	background: rgba(31, 41, 55, 0.95);
 	color: var(--text-primary);
 	padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-lg);
 	border-radius: var(--radius-md);
@@ -86,10 +91,48 @@
 
 .buttons-container {
 	display: flex;
-	gap: var(--spacing-md);
-	justify-content: flex-end;
-	width: 100%;
+	justify-content: space-between;
+	align-items: flex-end;
 	margin-top: var(--spacing-lg);
+	width: 100%;
+}
+
+.register-prompt {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	font-size: 0.95rem;
+	color: var(--text-secondary);
+}
+.register-section {
+	margin-top: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: var(--text-secondary);
+	font-size: 0.95rem;
+}
+
+.register-button {
+	background-color: var(--accent-primary);
+	color: white;
+	padding: 0.6rem 1.2rem;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 0.95rem;
+	transition: background-color 0.3s, transform 0.2s;
+}
+
+.register-button:hover {
+	background-color: var(--accent-hover);
+	transform: translateY(-1px);
+}
+
+.register-button:active {
+	transform: translateY(1px);
 }
 
 .cancel,

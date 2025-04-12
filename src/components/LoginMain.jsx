@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/IssueForm.css";
 
-export default function Login({
-	setIsLoginFormOpen,
-	setIsLoggedIn,
-	setIsRegisterFormOpen,
-}) {
+export default function Login({ setIsRegisterFormOpen, setIsLoggedIn }) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
@@ -59,30 +55,23 @@ export default function Login({
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 					{error && <div>{error.error}</div>}
+
 					<div className="buttons-container">
+						<div className="register-prompt">
+							<p>Don’t have an account yet?</p>
+							<button
+								type="button"
+								className="register-button"
+								onClick={() => setIsRegisterFormOpen(true)}
+							>
+								Register
+							</button>
+						</div>
 						<button className="submit-issue" type="submit">
 							Login
 						</button>
-
-						<button
-							type="button"
-							className="cancel"
-							onClick={() => setIsLoginFormOpen(false)}
-						>
-							Cancel
-						</button>
 					</div>
 				</form>
-				<div className="register-section">
-					<p>Don’t have an account yet?</p>
-					<button
-						type="button"
-						className="register-button"
-						onClick={() => setIsRegisterFormOpen(true)}
-					>
-						Register
-					</button>
-				</div>
 			</div>
 		</div>
 	);
