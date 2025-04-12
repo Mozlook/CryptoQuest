@@ -122,7 +122,9 @@ function App() {
 			tekst: tekst,
 		};
 		setTekst("");
+
 		try {
+			console.log("Sending request with CSRF token:", csrftoken);
 			const response = await fetch("https://api.mmozoluk.com/api/sprawdz/", {
 				method: "POST",
 				headers: {
@@ -133,17 +135,24 @@ function App() {
 				body: JSON.stringify(requestData),
 			});
 
-			const data = await response.json();
-			console.log(data);
+			const responseText = await response.text();
+			console.log("Raw response:", responseText);
 
-			if (response.ok) {
-				if (data.result === true) {
-					setPuzzleId((prevPuzzleId) => prevPuzzleId + 1);
+			try {
+				const data = JSON.parse(responseText);
+
+				if (response.ok) {
+					if (data.result === true) {
+						setPuzzleId((prevPuzzleId) => prevPuzzleId + 1);
+					} else {
+						console.log("Wrong Answer");
+					}
 				} else {
-					console.log("Wrong Answer");
+					console.log("Error: " + (data.error || "Unknown error"));
 				}
-			} else {
-				console.log("Error: " + data.error);
+			} catch (jsonError) {
+				console.error("Response is not valid JSON:", jsonError);
+				console.log("Response status:", response.status);
 			}
 		} catch (error) {
 			console.log("Error while sending request");
