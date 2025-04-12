@@ -26,6 +26,7 @@ export default function Header({
 					<button onClick={() => setIsLoginFormOpen(true)}>Login</button>
 				)}
 				{/* <button onClick={() => setPuzzleId(prev => prev + 1)}><i className="fas fa-cog"></i>PlaceHolder</button> */}
+				{/* <button onClick={() => setIsRegisterFormOpen(true)}>register</button> */}
 			</div>
 		</header>
 	);

@@ -1,117 +1,125 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	backdrop-filter: blur(4px);
+	z-index: 1000;
+}
 
 .issue-form-container {
-    background: #1f2937;
-    color: whitesmoke;
-    padding: 0px 20px 20px;
-    border-radius: 8px;
-    width: 50vw;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+	background: rgba(
+		31,
+		41,
+		55,
+		0.95
+	); /* var(--bg-secondary) z lekką przezroczystością */
+	color: var(--text-primary);
+	padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-lg);
+	border-radius: var(--radius-md);
+	width: 90%;
+	max-width: 600px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.issue-form-container > p{
-    text-align: start;
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-.issue-form-container > form{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-grow: 1;
-    background-color: #374151;
-    border-radius: 10px;
-    padding: 0px 25px 25px;
+.issue-form-container > p {
+	text-align: left;
+	font-size: 1.3rem;
+	font-weight: 500;
+	margin: var(--spacing-md) 0;
+	color: var(--text-secondary);
 }
 
-.issue-form-container > form > label{
-    font-size: 1.25rem;
-    color: aliceblue;
-    font-weight: 500;
-    padding-top: 15px;
-} 
-
-.issue-form-container > form > input{
-    background-color: #1f2937;
-    color: aliceblue;
-    border: 1px solid #4b5563;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
-    font-size: 1.25rem;
-    padding: 12px 15px;
-    width: 40%;
-    min-width: 200px;
-    box-sizing: border-box;
-    flex: 1;
+.issue-form-container > form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex-grow: 1;
+	background-color: var(--bg-tertiary);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+	gap: var(--spacing-sm);
+	width: 100%;
 }
 
-.issue-form-container > form >input:focus{
-    outline: 0;
+.issue-form-container > form > label {
+	font-size: 1.1rem;
+	color: var(--text-primary);
+	font-weight: 500;
+	margin-top: var(--spacing-sm);
 }
 
-.issue-form-container > form > textarea{
-    background-color: #1f2937;
-    color: aliceblue;
-    border: 1px solid #4b5563;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
-    font-size: 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    resize: none;
+.issue-form-container > form > input,
+.issue-form-container > form > textarea {
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-md);
+	font-family: inherit;
+	font-size: 1rem;
+	padding: 0.75rem var(--spacing-md);
+	width: 100%;
+	box-sizing: border-box;
+	transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.issue-form-container > form > textarea:focus{
-    outline: 0;
+.issue-form-container > form > input:focus,
+.issue-form-container > form > textarea:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--accent-primary);
+	border-color: var(--accent-primary);
 }
 
-.buttons-container{
-    display: flex;
-    gap: 25px;
-    margin-top:auto;
+.issue-form-container > form > textarea {
+	resize: none;
+	min-height: 120px;
+}
+
+.buttons-container {
+	display: flex;
+	gap: var(--spacing-md);
+	justify-content: flex-end;
+	width: 100%;
+	margin-top: var(--spacing-lg);
+}
+
+.cancel,
+.submit-issue {
+	background-color: var(--accent-primary);
+	color: white;
+	padding: 0.6rem 1.2rem;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.2s;
+	font-family: inherit;
+	font-size: 1rem;
 }
 
 .cancel {
-    margin-top: 10px;
-    background-color: #ef4444b0;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+	background-color: #ef4444cc;
 }
 
 .cancel:hover {
-    background-color: #dc2626;
-    transform: translateY(1px);
-}
-
-.submit-issue {
-    margin-top: 10px;
-    background-color: #2563eb;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+	background-color: #dc2626;
+	transform: translateY(-1px);
 }
 
 .submit-issue:hover {
-    background-color: #1d4ed8;
-    transform: translateY(1px);
+	background-color: var(--accent-hover);
+	transform: translateY(-1px);
+}
+
+.cancel:active,
+.submit-issue:active {
+	transform: translateY(1px);
 }

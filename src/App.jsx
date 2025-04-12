@@ -162,8 +162,19 @@ function App() {
 				setIsLoggedIn={setIsLoggedIn}
 				isLoggedIn={isLoggedIn}
 			/>
-			<DynamicComponent puzzleId={puzzleId} />
-			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
+			{!isLoggedIn && puzzleId > 1 ? (
+				<span>Login to play further</span>
+			) : (
+				<>
+					<DynamicComponent puzzleId={puzzleId} />
+					<SubmitForm
+						checkAnswer={checkAnswer}
+						setTekst={setTekst}
+						tekst={tekst}
+					/>
+				</>
+			)}
+
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
 			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}

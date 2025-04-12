@@ -35,7 +35,7 @@ export default function IssueForm({ setIsIssueFormOpen }) {
 	};
 
 	return (
-		<div className="overlay" onClick={() => setIsIssueFormOpen(false)}>
+		<div className="overlay">
 			<div
 				className="issue-form-container"
 				onClick={(e) => e.stopPropagation()}
