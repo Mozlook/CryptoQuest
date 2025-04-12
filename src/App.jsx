@@ -41,22 +41,6 @@ const DynamicComponent = React.memo(({ puzzleId }) => {
 	);
 });
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-
-	if (parts.length === 2) {
-		const cookieValue = parts.pop().split(";").shift();
-		console.log(`Found cookie ${name} with value:`, cookieValue);
-		return cookieValue;
-	}
-
-	console.log(`Cookie ${name} not found in:`, document.cookie);
-	return null;
-}
-
 function App() {
 	const [puzzleId, setPuzzleId] = useState(() => {
 		const savedPuzzleId = getFromLocalStorage("puzzleId");
@@ -88,7 +72,6 @@ function App() {
 				}
 
 				const data = await response.json();
-
 				const token = data.csrftoken;
 
 				if (token) {
@@ -105,7 +88,7 @@ function App() {
 		fetchCsrfToken();
 	}, []);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		saveToLocalStorage("puzzleId", puzzleId);
 	}, [puzzleId]);
 
@@ -127,9 +110,9 @@ function App() {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					"X-CSRFToken": csrftoken,
+					"X-CSRFToken": csrftoken, // Przesyłanie tokenu CSRF w nagłówkach
 				},
-				credentials: "include",
+				credentials: "include", // Ważne, aby przesłać ciasteczka
 				body: JSON.stringify(requestData),
 			});
 
@@ -163,22 +146,13 @@ function App() {
 				isLoggedIn={isLoggedIn}
 			/>
 			{!isLoggedIn && puzzleId > 1 && (
-				<>
-					<LoginMain
-						setIsRegisterFormOpen={setIsRegisterFormOpen}
-						setIsLoggedIn={setIsLoggedIn}
-					/>
-				</>
-			)}
-			<>
-				<DynamicComponent puzzleId={puzzleId} />
-				<SubmitForm
-					checkAnswer={checkAnswer}
-					setTekst={setTekst}
-					tekst={tekst}
+				<LoginMain
+					setIsRegisterFormOpen={setIsRegisterFormOpen}
+					setIsLoggedIn={setIsLoggedIn}
 				/>
-			</>
-
+			)}
+			<DynamicComponent puzzleId={puzzleId} />
+			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
 			<Footer />
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
 			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
