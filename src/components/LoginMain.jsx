@@ -45,7 +45,7 @@ export default function Login({
 				className="issue-form-container"
 				onClick={(e) => e.stopPropagation()}
 			>
-				<p>Login</p>
+				<p>Login to solve rest of the puzzles!</p>
 				<form onSubmit={handleSubmit}>
 					<label>Username:</label>
 					<input
