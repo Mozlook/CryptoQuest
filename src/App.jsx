@@ -172,6 +172,7 @@ function App() {
 					<LoginMain
 						setIsRegisterFormOpen={setIsRegisterFormOpen}
 						setIsLoggedIn={setIsLoggedIn}
+						puzzleId={puzzleId}
 					/>
 				</>
 			)}
@@ -192,6 +193,7 @@ function App() {
 					setIsLoginFormOpen={setIsLoginFormOpen}
 					setIsLoggedIn={setIsLoggedIn}
 					setIsRegisterFormOpen={setIsRegisterFormOpen}
+					puzzleId={puzzleId}
 				/>
 			)}
 			{isRegisterFormOpen && (

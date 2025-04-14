@@ -6,6 +6,7 @@ export default function Login({
 	setIsLoginFormOpen,
 	setIsLoggedIn,
 	setIsRegisterFormOpen,
+	puzzleId,
 }) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -20,6 +21,7 @@ export default function Login({
 				{
 					username,
 					password,
+					progress: puzzleId,
 				},
 				{
 					headers: {

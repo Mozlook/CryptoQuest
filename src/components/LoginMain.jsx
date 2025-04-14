@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/IssueForm.css";
 
-export default function Login({ setIsRegisterFormOpen, setIsLoggedIn }) {
+export default function Login({
+	setIsRegisterFormOpen,
+	setIsLoggedIn,
+	puzzleId,
+}) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
@@ -16,6 +20,7 @@ export default function Login({ setIsRegisterFormOpen, setIsLoggedIn }) {
 				{
 					username,
 					password,
+					progress: puzzleId,
 				},
 				{
 					headers: {
