@@ -70,11 +70,11 @@ function App() {
 				return res.json();
 			})
 			.then((data) => {
-				setProgress(data.progress);
+				setPuzzleId(data.progress);
 			})
 			.catch((err) => {
 				console.log("Błąd:", err);
-				setProgress(1);
+				setPuzzleId(1);
 			});
 	}, [isLoggedIn]);
 
@@ -110,10 +110,6 @@ function App() {
 
 		fetchCsrfToken();
 	}, []);
-
-	React.useEffect(() => {
-		saveToLocalStorage("puzzleId", puzzleId);
-	}, [puzzleId]);
 
 	const checkAnswer = async (e) => {
 		e.preventDefault();
