@@ -123,7 +123,7 @@ function App() {
 			}
 
 			const response = await axios.post(
-				"https://api.mmozoluk.com/api/sprawdz-progres/",
+				"https://api.mmozoluk.com/api/sprawdz-odpowiedz/",
 				{
 					answer: tekst,
 				},
@@ -139,53 +139,50 @@ function App() {
 				setError(err.response.data);
 			}
 		}
-
-		return (
-			<main className="main">
-				<Header
-					setIsAboutOpen={setIsAboutOpen}
-					setIsIssueFormOpen={setIsIssueFormOpen}
-					setPuzzleId={setPuzzleId}
-					setIsLoginFormOpen={setIsLoginFormOpen}
-					setIsRegisterFormOpen={setIsRegisterFormOpen}
-					setIsLoggedIn={setIsLoggedIn}
-					isLoggedIn={isLoggedIn}
-				/>
-				{!isLoggedIn && puzzleId > 1 && (
-					<>
-						<LoginMain
-							setIsRegisterFormOpen={setIsRegisterFormOpen}
-							setIsLoggedIn={setIsLoggedIn}
-						/>
-					</>
-				)}
+	};
+	return (
+		<main className="main">
+			<Header
+				setIsAboutOpen={setIsAboutOpen}
+				setIsIssueFormOpen={setIsIssueFormOpen}
+				setPuzzleId={setPuzzleId}
+				setIsLoginFormOpen={setIsLoginFormOpen}
+				setIsRegisterFormOpen={setIsRegisterFormOpen}
+				setIsLoggedIn={setIsLoggedIn}
+				isLoggedIn={isLoggedIn}
+			/>
+			{!isLoggedIn && puzzleId > 1 && (
 				<>
-					<DynamicComponent puzzleId={puzzleId} />
-					<SubmitForm
-						checkAnswer={checkAnswer}
-						setTekst={setTekst}
-						tekst={tekst}
+					<LoginMain
+						setIsRegisterFormOpen={setIsRegisterFormOpen}
+						setIsLoggedIn={setIsLoggedIn}
 					/>
 				</>
+			)}
+			<>
+				<DynamicComponent puzzleId={puzzleId} />
+				<SubmitForm
+					checkAnswer={checkAnswer}
+					setTekst={setTekst}
+					tekst={tekst}
+				/>
+			</>
 
-				<Footer />
-				{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
-				{isIssueFormOpen && (
-					<IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />
-				)}
-				{isLoginFormOpen && (
-					<Login
-						setIsLoginFormOpen={setIsLoginFormOpen}
-						setIsLoggedIn={setIsLoggedIn}
-						setIsRegisterFormOpen={setIsRegisterFormOpen}
-					/>
-				)}
-				{isRegisterFormOpen && (
-					<Register setIsRegisterFormOpen={setIsRegisterFormOpen} />
-				)}
-			</main>
-		);
-	};
+			<Footer />
+			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
+			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
+			{isLoginFormOpen && (
+				<Login
+					setIsLoginFormOpen={setIsLoginFormOpen}
+					setIsLoggedIn={setIsLoggedIn}
+					setIsRegisterFormOpen={setIsRegisterFormOpen}
+				/>
+			)}
+			{isRegisterFormOpen && (
+				<Register setIsRegisterFormOpen={setIsRegisterFormOpen} />
+			)}
+		</main>
+	);
 }
 
 export default App;
