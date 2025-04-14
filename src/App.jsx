@@ -40,10 +40,7 @@ function getCookie(name) {
 }
 
 function App() {
-	const [puzzleId, setPuzzleId] = useState(() => {
-		const savedPuzzleId = getFromLocalStorage("puzzleId");
-		return savedPuzzleId !== null ? savedPuzzleId : 1;
-	});
+	const [puzzleId, setPuzzleId] = useState(1);
 	const [isAboutOpen, setIsAboutOpen] = useState(false);
 	const [isIssueFormOpen, setIsIssueFormOpen] = useState(false);
 	const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
@@ -56,7 +53,7 @@ function App() {
 
 	useEffect(() => {
 		if (!isLoggedIn) {
-			setProgress(1);
+			setPuzzleId(1);
 			return;
 		}
 
@@ -79,7 +76,7 @@ function App() {
 				console.log("Błąd:", err);
 				setProgress(1);
 			});
-	}, []);
+	}, [isLoggedIn]);
 
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
