@@ -56,7 +56,7 @@ function App() {
 			setPuzzleId(1);
 			return;
 		}
-
+		const token = sessionStorage.getItem("authToken");
 		fetch("https://api.mmozoluk.com/api/sprawdz-progres/", {
 			method: "GET",
 			headers: {
