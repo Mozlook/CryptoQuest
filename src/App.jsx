@@ -111,97 +111,79 @@ function App() {
 	const checkAnswer = async (e) => {
 		e.preventDefault();
 
-		if (!csrftoken) {
-			console.error("Brak tokena CSRF!");
-			return;
-		}
-
-		const requestData = {
-			numer: parseInt(puzzleId),
-			tekst: tekst,
-		};
 		setTekst("");
 
 		try {
-			console.log("Sending request with CSRF token:", csrftoken);
-			const response = await fetch("https://api.mmozoluk.com/api/sprawdz/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"X-CSRFToken": csrftoken,
-				},
-				credentials: "include",
-				body: JSON.stringify(requestData),
-			});
+			const config = {};
 
-			const responseText = await response.text();
-			console.log("Raw response:", responseText);
-
-			try {
-				const data = JSON.parse(responseText);
-
-				if (response.ok) {
-					if (data.result === true) {
-						setPuzzleId((prevPuzzleId) => prevPuzzleId + 1);
-					} else {
-						console.log("Wrong Answer");
-					}
-				} else {
-					console.log("Error: " + (data.error || "Unknown error"));
-				}
-			} catch (jsonError) {
-				console.error("Response is not valid JSON:", jsonError);
-				console.log("Response status:", response.status);
+			if (isLoggedIn) {
+				config.headers = {
+					Authorization: `Token ${token}`,
+				};
 			}
-		} catch (error) {
-			console.log("Error while sending request");
-			console.log(error);
-		}
-	};
 
-	return (
-		<main className="main">
-			<Header
-				setIsAboutOpen={setIsAboutOpen}
-				setIsIssueFormOpen={setIsIssueFormOpen}
-				setPuzzleId={setPuzzleId}
-				setIsLoginFormOpen={setIsLoginFormOpen}
-				setIsRegisterFormOpen={setIsRegisterFormOpen}
-				setIsLoggedIn={setIsLoggedIn}
-				isLoggedIn={isLoggedIn}
-			/>
-			{!isLoggedIn && puzzleId > 1 && (
+			const response = await axios.post(
+				"https://api.mmozoluk.com/api/sprawdz-progres/",
+				{
+					answer: tekst,
+				},
+				config
+			);
+
+			console.log(response.data);
+		} catch (err) {
+			console.log(err.response);
+			if (err.response && err.response.data) {
+				setError(err.response.data);
+			}
+		}
+
+		return (
+			<main className="main">
+				<Header
+					setIsAboutOpen={setIsAboutOpen}
+					setIsIssueFormOpen={setIsIssueFormOpen}
+					setPuzzleId={setPuzzleId}
+					setIsLoginFormOpen={setIsLoginFormOpen}
+					setIsRegisterFormOpen={setIsRegisterFormOpen}
+					setIsLoggedIn={setIsLoggedIn}
+					isLoggedIn={isLoggedIn}
+				/>
+				{!isLoggedIn && puzzleId > 1 && (
+					<>
+						<LoginMain
+							setIsRegisterFormOpen={setIsRegisterFormOpen}
+							setIsLoggedIn={setIsLoggedIn}
+						/>
+					</>
+				)}
 				<>
-					<LoginMain
-						setIsRegisterFormOpen={setIsRegisterFormOpen}
-						setIsLoggedIn={setIsLoggedIn}
+					<DynamicComponent puzzleId={puzzleId} />
+					<SubmitForm
+						checkAnswer={checkAnswer}
+						setTekst={setTekst}
+						tekst={tekst}
 					/>
 				</>
-			)}
-			<>
-				<DynamicComponent puzzleId={puzzleId} />
-				<SubmitForm
-					checkAnswer={checkAnswer}
-					setTekst={setTekst}
-					tekst={tekst}
-				/>
-			</>
 
-			<Footer />
-			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
-			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
-			{isLoginFormOpen && (
-				<Login
-					setIsLoginFormOpen={setIsLoginFormOpen}
-					setIsLoggedIn={setIsLoggedIn}
-					setIsRegisterFormOpen={setIsRegisterFormOpen}
-				/>
-			)}
-			{isRegisterFormOpen && (
-				<Register setIsRegisterFormOpen={setIsRegisterFormOpen} />
-			)}
-		</main>
-	);
+				<Footer />
+				{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
+				{isIssueFormOpen && (
+					<IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />
+				)}
+				{isLoginFormOpen && (
+					<Login
+						setIsLoginFormOpen={setIsLoginFormOpen}
+						setIsLoggedIn={setIsLoggedIn}
+						setIsRegisterFormOpen={setIsRegisterFormOpen}
+					/>
+				)}
+				{isRegisterFormOpen && (
+					<Register setIsRegisterFormOpen={setIsRegisterFormOpen} />
+				)}
+			</main>
+		);
+	};
 }
 
 export default App;
