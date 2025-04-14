@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useState, useEffect } from "react";
+import axios from "axios";
 import Header from "./components/Header";
 import SubmitForm from "./components/SubmitForm";
 import Footer from "./components/Footer";
@@ -56,24 +57,20 @@ function App() {
 			setPuzzleId(1);
 			return;
 		}
+
 		const token = sessionStorage.getItem("authToken");
-		fetch("https://api.mmozoluk.com/api/sprawdz-progres/", {
-			method: "GET",
-			headers: {
-				Authorization: `Token ${token}`,
-			},
-		})
-			.then((res) => {
-				if (!res.ok) {
-					throw new Error("Nieautoryzowany");
-				}
-				return res.json();
+
+		axios
+			.get("https://api.mmozoluk.com/api/sprawdz-progres/", {
+				headers: {
+					Authorization: `Token ${token}`,
+				},
 			})
-			.then((data) => {
-				setPuzzleId(data.progress);
+			.then((response) => {
+				setPuzzleId(response.data.progress);
 			})
-			.catch((err) => {
-				console.log("Błąd:", err);
+			.catch((error) => {
+				console.error("Błąd:", error);
 				setPuzzleId(1);
 			});
 	}, [isLoggedIn]);
