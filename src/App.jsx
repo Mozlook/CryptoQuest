@@ -112,7 +112,7 @@ function App() {
 		e.preventDefault();
 
 		setTekst("");
-
+		const token = sessionStorage.getItem("authToken");
 		try {
 			const config = {};
 
