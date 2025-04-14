@@ -9,24 +9,6 @@ import Register from "./components/Register.jsx";
 import LoginMain from "./components/LoginMain.jsx";
 import "./index.css";
 
-const saveToLocalStorage = (key, data) => {
-	try {
-		localStorage.setItem(key, JSON.stringify(data));
-	} catch (error) {
-		console.error("Błąd zapisu do LocalStorage:", error);
-	}
-};
-
-const getFromLocalStorage = (key) => {
-	try {
-		const data = localStorage.getItem(key);
-		return data ? JSON.parse(data) : null;
-	} catch (error) {
-		console.error("Błąd odczytu z LocalStorage:", error);
-		return null;
-	}
-};
-
 const DynamicComponent = React.memo(({ puzzleId }) => {
 	const Component = lazy(() =>
 		import(`./components/puzzles/Puzzle${puzzleId}.jsx`).catch(() =>
@@ -71,6 +53,33 @@ function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(
 		!!sessionStorage.getItem("authToken")
 	);
+
+	useEffect(() => {
+		if (!isLoggedIn) {
+			setProgress(1);
+			return;
+		}
+
+		fetch("https://api.mmozoluk.com/api/sprawdz-progres/", {
+			method: "GET",
+			headers: {
+				Authorization: `Token ${token}`,
+			},
+		})
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error("Nieautoryzowany");
+				}
+				return res.json();
+			})
+			.then((data) => {
+				setProgress(data.progress);
+			})
+			.catch((err) => {
+				console.log("Błąd:", err);
+				setProgress(1);
+			});
+	}, []);
 
 	useEffect(() => {
 		const fetchCsrfToken = async () => {
