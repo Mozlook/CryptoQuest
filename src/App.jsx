@@ -130,7 +130,9 @@ function App() {
 				config
 			);
 
-			console.log(response.data);
+			if (!isLoggedIn && response.data.answer === true) {
+				setPuzzleId(2);
+			}
 		} catch (err) {
 			console.log(err.response);
 			if (err.response && err.response.data) {
