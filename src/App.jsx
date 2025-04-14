@@ -130,8 +130,24 @@ function App() {
 				config
 			);
 
-			if (!isLoggedIn && response.data.answer === true) {
-				setPuzzleId(2);
+			if (response.data.answer === true) {
+				if (isLoggedIn) {
+					axios
+						.get("https://api.mmozoluk.com/api/sprawdz-progres/", {
+							headers: {
+								Authorization: `Token ${token}`,
+							},
+						})
+						.then((response) => {
+							setPuzzleId(response.data.progress);
+						})
+						.catch((error) => {
+							console.error("Błąd:", error);
+							setPuzzleId(1);
+						});
+				} else {
+					setPuzzleId(2);
+				}
 			}
 		} catch (err) {
 			console.log(err.response);
