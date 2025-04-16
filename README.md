@@ -42,9 +42,6 @@ src/
 │   ├── About.jsx
 │   ├── IssueForm.jsx
 │   └── puzzles/
-│       ├── Puzzle1.jsx
-│       ├── Puzzle2.jsx
-│       └── PuzzleFinal.jsx
 ├── App.jsx
 ├── index.css
 └── index.js
