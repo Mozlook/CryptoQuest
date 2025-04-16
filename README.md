@@ -2,7 +2,7 @@
 
 A dynamic puzzle-based web application built with **React**, featuring authentication, progress tracking, and dynamic component loading.
 
-![React Puzzle App Screenshot](https://via.placeholder.com/1000x400?text=Screenshot+Coming+Soon)
+![React Puzzle App Screenshot](https://imgur.com/a/qCnTh8d)
 
 ---
 
@@ -120,8 +120,8 @@ This project is licensed under the **MIT License**.
 ## 📞 Contact
 
 **Author:** Your Name  
-📧 [your.email@example.com]  
-🌍 [your-portfolio.com](https://your-portfolio.com)
+📧 [mikolaj.moozoluk@gmail.com]  
+🌍 [mmozoluk.com](https://mmozoluk.com)
 
 ---
 
