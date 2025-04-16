@@ -227,6 +227,10 @@ header {
 	font-size: 0.9rem;
 }
 
+.error {
+	color: rgb(197, 51, 51);
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
 	.puzzle-container {

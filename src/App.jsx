@@ -10,6 +10,14 @@ import Register from "./components/Register.jsx";
 import LoginMain from "./components/LoginMain.jsx";
 import "./index.css";
 
+/**
+ * Dynamically imports and renders a puzzle component based on `puzzleId`.
+ * If the specific puzzle component fails to load, it falls back to `PuzzleFinal`.
+ *
+ * @component
+ * @param {Object} props
+ * @param {number} props.puzzleId - The current puzzle's ID.
+ */
 const DynamicComponent = React.memo(({ puzzleId }) => {
 	const Component = lazy(() =>
 		import(`./components/puzzles/Puzzle${puzzleId}.jsx`).catch(() =>
@@ -18,28 +26,18 @@ const DynamicComponent = React.memo(({ puzzleId }) => {
 	);
 
 	return (
-		<Suspense fallback={<div>Ładowanie...</div>}>
+		<Suspense fallback={<div>Loading...</div>}>
 			<Component />
 		</Suspense>
 	);
 });
 
-function getCookie(name) {
-	if (typeof document === "undefined") return null;
-
-	const value = `; ${document.cookie}`;
-	const parts = value.split(`; ${name}=`);
-
-	if (parts.length === 2) {
-		const cookieValue = parts.pop().split(";").shift();
-		console.log(`Found cookie ${name} with value:`, cookieValue);
-		return cookieValue;
-	}
-
-	console.log(`Cookie ${name} not found in:`, document.cookie);
-	return null;
-}
-
+/**
+ * The main application component.
+ * Manages user state, authentication, puzzle progression, and modal visibility.
+ *
+ * @component
+ */
 function App() {
 	const [puzzleId, setPuzzleId] = useState(1);
 	const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -52,6 +50,10 @@ function App() {
 		!!sessionStorage.getItem("authToken")
 	);
 
+	/**
+	 * Checks the user's puzzle progress on app load or login.
+	 * If the user is not logged in, resets the puzzle to ID 1.
+	 */
 	useEffect(() => {
 		if (!isLoggedIn) {
 			setPuzzleId(1);
@@ -70,49 +72,22 @@ function App() {
 				setPuzzleId(response.data.progress);
 			})
 			.catch((error) => {
-				console.error("Błąd:", error);
+				console.error("Error:", error);
 				setPuzzleId(1);
 			});
 	}, [isLoggedIn]);
 
-	useEffect(() => {
-		const fetchCsrfToken = async () => {
-			try {
-				const response = await fetch("https://api.mmozoluk.com/api/get-csrf/", {
-					method: "GET",
-					credentials: "include",
-					headers: {
-						Accept: "application/json",
-					},
-				});
-
-				if (!response.ok) {
-					throw new Error("Network response was not ok");
-				}
-
-				const data = await response.json();
-
-				const token = data.csrftoken;
-
-				if (token) {
-					setCsrftoken(token);
-					console.log("CSRF token received:", token);
-				} else {
-					console.error("No CSRF token in response");
-				}
-			} catch (error) {
-				console.error("Error fetching CSRF token:", error);
-			}
-		};
-
-		fetchCsrfToken();
-	}, []);
-
+	/**
+	 * Submits the user's answer and updates puzzle progression if correct.
+	 *
+	 * @param {React.FormEvent<HTMLFormElement>} e - Form submission event.
+	 */
 	const checkAnswer = async (e) => {
 		e.preventDefault();
 
 		setTekst("");
 		const token = sessionStorage.getItem("authToken");
+
 		try {
 			const config = {};
 
@@ -124,9 +99,7 @@ function App() {
 
 			const response = await axios.post(
 				"https://api.mmozoluk.com/api/sprawdz-odpowiedz/",
-				{
-					answer: tekst,
-				},
+				{ answer: tekst },
 				config
 			);
 
@@ -134,15 +107,13 @@ function App() {
 				if (isLoggedIn) {
 					axios
 						.get("https://api.mmozoluk.com/api/sprawdz-progres/", {
-							headers: {
-								Authorization: `Token ${token}`,
-							},
+							headers: { Authorization: `Token ${token}` },
 						})
 						.then((response) => {
 							setPuzzleId(response.data.progress);
 						})
 						.catch((error) => {
-							console.error("Błąd:", error);
+							console.error("Error:", error);
 							setPuzzleId(1);
 						});
 				} else {
@@ -156,6 +127,7 @@ function App() {
 			}
 		}
 	};
+
 	return (
 		<main className="main">
 			<Header
@@ -167,25 +139,23 @@ function App() {
 				setIsLoggedIn={setIsLoggedIn}
 				isLoggedIn={isLoggedIn}
 			/>
+
+			{/* Display login screen if not logged in and progressed beyond puzzle 1 */}
 			{!isLoggedIn && puzzleId > 1 && (
-				<>
-					<LoginMain
-						setIsRegisterFormOpen={setIsRegisterFormOpen}
-						setIsLoggedIn={setIsLoggedIn}
-						puzzleId={puzzleId}
-					/>
-				</>
-			)}
-			<>
-				<DynamicComponent puzzleId={puzzleId} />
-				<SubmitForm
-					checkAnswer={checkAnswer}
-					setTekst={setTekst}
-					tekst={tekst}
+				<LoginMain
+					setIsRegisterFormOpen={setIsRegisterFormOpen}
+					setIsLoggedIn={setIsLoggedIn}
+					puzzleId={puzzleId}
 				/>
-			</>
+			)}
+
+			{/* Render the dynamic puzzle component and answer submission form */}
+			<DynamicComponent puzzleId={puzzleId} />
+			<SubmitForm checkAnswer={checkAnswer} setTekst={setTekst} tekst={tekst} />
 
 			<Footer />
+
+			{/* Conditionally rendered modals/forms */}
 			{isAboutOpen && <About setIsAboutOpen={setIsAboutOpen} />}
 			{isIssueFormOpen && <IssueForm setIsIssueFormOpen={setIsIssueFormOpen} />}
 			{isLoginFormOpen && (

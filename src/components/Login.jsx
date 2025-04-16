@@ -60,7 +60,7 @@ export default function Login({
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					{error && <div>{error.error}</div>}
+					{error && <div className="error">{error.error}</div>}
 					<div className="buttons-container">
 						<button className="submit-issue" type="submit">
 							Login

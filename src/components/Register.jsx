@@ -58,14 +58,18 @@ export default function Register({ setIsRegisterFormOpen }) {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
-					{formErrors.username && <span>{formErrors.username[0]}</span>}
+					{formErrors.username && (
+						<span className="error">{formErrors.username[0]}</span>
+					)}
 					<label>Email:</label>
 					<input
 						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					{formErrors.email && <span>{formErrors.email[0]}</span>}
+					{formErrors.email && (
+						<span className="error">{formErrors.email[0]}</span>
+					)}
 
 					<label>Password:</label>
 					<input
@@ -80,7 +84,9 @@ export default function Register({ setIsRegisterFormOpen }) {
 						value={password2}
 						onChange={(e) => setPassword2(e.target.value)}
 					/>
-					{formErrors.password && <span>{formErrors.password[0]}</span>}
+					{formErrors.password && (
+						<span className="error">{formErrors.password[0]}</span>
+					)}
 					<div className="buttons-container">
 						<button type="submit" className="submit-issue">
 							Register

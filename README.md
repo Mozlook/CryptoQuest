@@ -1,12 +1,133 @@
-# React + Vite
+# 🧩 React Puzzle App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic puzzle-based web application built with **React**, featuring authentication, progress tracking, and dynamic component loading.
 
-Currently, two official plugins are available:
+![React Puzzle App Screenshot](https://via.placeholder.com/1000x400?text=Screenshot+Coming+Soon)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔐 **User Authentication** (Login & Register)
+- 🧠 **Puzzle System** with dynamic loading (`React.lazy`)
+- 📈 **Progress Tracking** via external API
+- 📨 **Answer Submission** and validation
+- 📋 Modular component structure
+- 🌐 REST API integration using `axios`
+- 🎨 Styled with custom CSS (`index.css`)
+
+---
+
+## 🛠️ Technologies Used
+
+- **React**
+- **Axios**
+- **React Suspense + Lazy**
+- **Session Storage** for token handling
+- **Custom REST API**
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+├── components/
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   ├── LoginMain.jsx
+│   ├── SubmitForm.jsx
+│   ├── About.jsx
+│   ├── IssueForm.jsx
+│   └── puzzles/
+│       ├── Puzzle1.jsx
+│       ├── Puzzle2.jsx
+│       └── PuzzleFinal.jsx
+├── App.jsx
+├── index.css
+└── index.js
+```
+
+---
+
+## 🔧 Setup Instructions
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/yourusername/react-puzzle-app.git
+cd react-puzzle-app
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+```
+
+3. **Start the development server:**
+
+```bash
+npm run dev
+# or
+npm start
+```
+
+4. **Configure the API:**
+
+> The app connects to `https://api.mmozoluk.com`. Ensure your backend is running and accessible.
+
+---
+
+## 🔐 Authentication
+
+- Tokens are saved in `sessionStorage`
+- On login, the user receives a token used for future API requests
+- Progress is loaded automatically if a valid token exists
+
+---
+
+## 📡 API Endpoints
+
+- `GET /api/sprawdz-progres/` → Fetch user progress
+- `POST /api/sprawdz-odpowiedz/` → Validate puzzle answer
+
+Headers:
+
+```http
+Authorization: Token <your_token_here>
+```
+
+---
+
+## 🧠 Contribution
+
+Want to contribute?
+
+1. Fork this repository
+2. Create a new branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m 'Add new feature'`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Create a pull request 🎉
+
+---
+
+## 📃 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 📞 Contact
+
+**Author:** Your Name  
+📧 [your.email@example.com]  
+🌍 [your-portfolio.com](https://your-portfolio.com)
+
+---
+
+## ⭐️ Star This Project
+
+If you like it, don’t forget to ⭐ the repo to support the project!

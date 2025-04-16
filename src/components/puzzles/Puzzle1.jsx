@@ -1,3 +1,5 @@
+import "./puzzlesStyle/Puzzle1.css";
+
 export default function Puzzle() {
 	return (
 		<div className="puzzle-container">
