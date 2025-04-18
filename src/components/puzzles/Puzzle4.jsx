@@ -1,3 +1,4 @@
+import "./puzzlesStyle/Puzzle4.css";
 import { useEffect, useState } from "react";
 const useKeySequence = (targetSequence, callback) => {
 	const [keys, setKeys] = useState([]);
@@ -28,7 +29,11 @@ export default function Puzzle() {
 			<div className="puzzle-content">
 				<p>Sometimes, pressing the right buttons brings surprising results.</p>
 				<p>Can you remember the legendary cheat?</p>
-				{solved && <p>Secret password is: Ghdc@3c</p>}
+				{solved && (
+					<div className="code">
+						<p>The password is: Ghdc@3c</p>
+					</div>
+				)}
 				{useKeySequence(
 					[
 						"ArrowUp",

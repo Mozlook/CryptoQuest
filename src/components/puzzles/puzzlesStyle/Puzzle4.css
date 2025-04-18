@@ -1,0 +1,24 @@
+.puzzle-content {
+	justify-content: start;
+	align-items: center;
+}
+.code {
+	background-color: rgb(1, 163, 1);
+	border-radius: 5px;
+	padding: 10px;
+
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

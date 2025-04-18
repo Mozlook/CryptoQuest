@@ -1,0 +1,9 @@
+.puzzle-content {
+	justify-content: start;
+	align-items: center;
+	position: relative;
+}
+
+.puzzle-content > p {
+	color: whitesmoke;
+}

@@ -126,6 +126,8 @@ function App() {
 				setError(err.response.data);
 			}
 		}
+
+		window.location.reload();
 	};
 
 	return (

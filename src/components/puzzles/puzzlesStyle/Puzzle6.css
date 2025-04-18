@@ -1,0 +1,106 @@
+body,
+html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.puzzle-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.puzzle-content {
+	width: 80%;
+	max-width: 600px;
+	padding: 30px;
+	background-color: #21262d;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	color: #ffffff;
+	text-align: center;
+}
+
+.puzzle-content p {
+	font-size: 18px;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.puzzle-element {
+	width: 60px;
+	height: 60px;
+	background: #0d1117;
+	cursor: pointer;
+	transition: transform 0.3s;
+	box-sizing: border-box;
+}
+
+.puzzle-element:hover {
+	transform: scale(1.05);
+}
+
+.puzzle-cover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.005);
+	z-index: 10;
+	transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.puzzle-cover.fall {
+	transform: translateY(500%);
+}
+
+.hint-element {
+	background-color: gold;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	margin: 0;
+}
+
+.hint-element > p {
+	margin: 0;
+	color: black;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+h2 {
+	color: #ffffff;
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+
+.answer-element {
+	background-color: gray;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+	margin: 0;
+}
+
+.answer-element > p {
+	margin: 0;
+	color: black;
+	font-weight: bold;
+	font-size: 18px;
+}
