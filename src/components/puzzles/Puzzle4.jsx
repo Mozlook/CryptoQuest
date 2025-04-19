@@ -1,4 +1,3 @@
-import "./puzzlesStyle/Puzzle4.css";
 import { useEffect, useState } from "react";
 const useKeySequence = (targetSequence, callback) => {
 	const [keys, setKeys] = useState([]);
@@ -22,6 +21,17 @@ const useKeySequence = (targetSequence, callback) => {
 };
 
 export default function Puzzle() {
+	useEffect(() => {
+		const style = document.createElement("link");
+		style.rel = "stylesheet";
+		style.href = "puzzlesStyle/Puzzle4.css";
+		style.dataset.dynamic = "true";
+		document.head.appendChild(style);
+
+		return () => {
+			document.head.removeChild(style);
+		};
+	}, []);
 	const [solved, setSolved] = useState(false);
 	return (
 		<div className="puzzle-container">

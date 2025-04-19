@@ -1,5 +1,4 @@
-import "./puzzlesStyle/Puzzle6.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const LETTERS = ["S", "E", "K", "R", "G", "T", "C", "O", "D", "V"];
 
@@ -17,6 +16,17 @@ const POSITIONS = [
 ];
 
 export default function Puzzle() {
+	useEffect(() => {
+		const style = document.createElement("link");
+		style.rel = "stylesheet";
+		style.href = "puzzlesStyle/Puzzle6.css";
+		style.dataset.dynamic = "true";
+		document.head.appendChild(style);
+
+		return () => {
+			document.head.removeChild(style);
+		};
+	}, []);
 	return (
 		<div>
 			{LETTERS.map((letter, index) => (
