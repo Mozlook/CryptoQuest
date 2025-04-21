@@ -1,4 +1,23 @@
 .puzzle-content {
 	justify-content: start;
 	align-items: center;
+	position: relative;
+}
+
+.img-cover {
+	position: absolute;
+	inset: 0;
+	background-color: #21262d;
+	pointer-events: none;
+	mask-image: radial-gradient(
+		circle 15px at -100px -100px,
+		transparent 0%,
+		black 100%
+	);
+	-webkit-mask-image: radial-gradient(
+		circle 15px at -100px -100px,
+		transparent 0%,
+		black 100%
+	);
+	transition: mask-image 0.1s ease, -webkit-mask-image 0.1s ease;
 }

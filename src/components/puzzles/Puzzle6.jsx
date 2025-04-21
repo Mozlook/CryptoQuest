@@ -5,7 +5,7 @@ const LETTERS = ["S", "E", "K", "R", "G", "T", "C", "O", "D", "V"];
 const POSITIONS = [
 	{ top: 10, left: 15 },
 	{ top: 25, left: 75 },
-	{ top: 40, left: 25 },
+	{ top: 40, left: 15 },
 	{ top: 45, left: 85 },
 	{ top: 15, left: 75 },
 	{ top: 70, left: 40 },
@@ -16,6 +16,17 @@ const POSITIONS = [
 ];
 
 export default function Puzzle() {
+	const [revealed, setRevealed] = useState(false);
+	const [hidden, setHidden] = useState(false);
+
+	const handleClick = () => {
+		if (!revealed) setRevealed(true);
+	};
+
+	const handleTransitionEnd = () => {
+		if (revealed) setHidden(true);
+	};
+
 	useEffect(() => {
 		const style = document.createElement("link");
 		style.rel = "stylesheet";
@@ -39,11 +50,21 @@ export default function Puzzle() {
 			))}
 			<div className="puzzle-container">
 				<h2>All that glitters is not gold</h2>
-				<div className="puzzle-content">
-					<p>
-						No way. A hidden clue! Look around the screen, there could be TENS
-						of them.
-					</p>
+				<div className="puzzle-content" onClick={handleClick}>
+					{!hidden && (
+						<div
+							className={`description-cover ${revealed ? "fall" : ""}`}
+							onTransitionEnd={handleTransitionEnd}
+						></div>
+					)}
+					{revealed && (
+						<div className="description-element">
+							<p>
+								No way. A hidden clue! Look around the screen, there could be
+								TENS of them.
+							</p>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

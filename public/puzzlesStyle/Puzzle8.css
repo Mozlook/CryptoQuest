@@ -1,0 +1,37 @@
+.puzzle-content {
+	justify-content: start;
+	align-items: center;
+}
+.crossword {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(5, 40px);
+	grid-template-rows: repeat(5, 40px);
+	gap: 5px;
+}
+
+.row {
+	display: flex;
+}
+
+input {
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	font-size: 20px;
+	border: 1px solid #ccc;
+}
+
+input:focus {
+	outline: none;
+	border-color: #3b82f6;
+}
+
+.clues {
+	max-width: 300px;
+}
