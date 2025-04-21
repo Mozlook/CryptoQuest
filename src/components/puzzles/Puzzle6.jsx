@@ -11,7 +11,7 @@ const POSITIONS = [
 	{ top: 70, left: 40 },
 	{ top: 60, left: 20 },
 	{ top: 80, left: 70 },
-	{ top: 60, left: 50 },
+	{ top: 65, left: 50 },
 	{ top: 85, left: 10 },
 ];
 
