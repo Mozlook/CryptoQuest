@@ -11,6 +11,7 @@ export default function Login({
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
+	const [staySignedIn, setStaySignedIn] = useState(false);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -30,6 +31,9 @@ export default function Login({
 				}
 			);
 			console.log(response.data);
+			if (staySignedIn) {
+				localStorage.setItem("authToken", response.data.token);
+			}
 			sessionStorage.setItem("authToken", response.data.token);
 			setIsLoggedIn(true);
 			setIsLoginFormOpen(false);
@@ -60,6 +64,15 @@ export default function Login({
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
+					<div>
+						<label>Stay signed in?</label>
+						<input
+							type="checkbox"
+							onChange={() => {
+								setStaySignedIn(!staySignedIn);
+							}}
+						/>
+					</div>
 					{error && <div className="error">{error.error}</div>}
 					<div className="buttons-container">
 						<button className="submit-issue" type="submit">

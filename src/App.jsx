@@ -45,11 +45,10 @@ function App() {
 	const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
 	const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
 	const [tekst, setTekst] = useState("");
-	const [csrftoken, setCsrftoken] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(
-		!!sessionStorage.getItem("authToken")
+		!!localStorage.getItem("authToken") && !!sessionStorage.getItem("authToken")
 	);
-
+	const localToken = sessionStorage.getItem("authToken");
 	/**
 	 * Checks the user's puzzle progress on app load or login.
 	 * If the user is not logged in, resets the puzzle to ID 1.
@@ -60,7 +59,7 @@ function App() {
 			return;
 		}
 
-		const token = sessionStorage.getItem("authToken");
+		const token = localToken ? localToken : sessionStorage.getItem("authToken");
 
 		axios
 			.get("https://api.mmozoluk.com/api/sprawdz-progres/", {
