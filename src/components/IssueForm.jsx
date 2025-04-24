@@ -1,34 +1,33 @@
 import "../Styles/IssueForm.css";
 import { useState } from "react";
+import axios from "axios";
 export default function IssueForm({ setIsIssueFormOpen }) {
 	const [puzzle_name, setPuzzleName] = useState("");
 	const [issue_description, setIssueDescription] = useState("");
+	const [image, setImage] = useState(null);
 
 	const SubmitIssue = async (e) => {
 		e.preventDefault();
-		setIsIssueFormOpen(false);
-		const requestData = {
-			numer: puzzle_name,
-			opis: issue_description,
-		};
+
+		const formData = new FormData();
+		formData.append("numer", puzzle_name);
+		formData.append("opis", issue_description);
+		if (image) {
+			formData.append("image", image);
+		}
 
 		try {
-			const response = await fetch("https://api.mmozoluk.com/api/bledy/", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(requestData),
-			});
-
-			if (!response.ok) {
-				const errorData = await response.json();
-				console.error("Błąd z backendu:", errorData);
-				return;
-			}
-
-			const data = await response.json();
-			console.log("Zgłoszenie wysłane:", data);
+			const response = await axios.post(
+				"https://api.mmozoluk.com/api/bledy/",
+				formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
+			console.log("Zgłoszenie wysłane:", response.data);
+			setIsIssueFormOpen(false);
 		} catch (error) {
 			console.error("Wystąpił błąd podczas wysyłania zapytania:", error);
 		}
@@ -57,6 +56,12 @@ export default function IssueForm({ setIsIssueFormOpen }) {
 						name="issue_description"
 						placeholder="Describe your issue here..."
 						onChange={(e) => setIssueDescription(e.target.value)}
+					/>
+					<label>Attach a image</label>
+					<input
+						type="file"
+						accept="image/*"
+						onChange={(e) => setImage(e.target.files[0])}
 					/>
 					<div className="buttons-container">
 						<button className="submit-issue" onClick={(e) => SubmitIssue(e)}>

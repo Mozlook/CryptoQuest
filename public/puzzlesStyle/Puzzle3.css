@@ -3,12 +3,21 @@
 	align-items: center;
 	position: relative;
 }
-
+.puzzle-content > img {
+	width: auto;
+	height: 100%;
+}
 .img-cover {
 	position: absolute;
-	inset: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	background-color: #21262d;
 	pointer-events: none;
+	width: auto;
+	height: auto;
+
 	mask-image: radial-gradient(
 		circle 15px at -100px -100px,
 		transparent 0%,
