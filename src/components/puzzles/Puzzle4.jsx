@@ -21,6 +21,7 @@ const useKeySequence = (targetSequence, callback) => {
 };
 
 export default function Puzzle() {
+	const password = import.meta.env.VITE_PUZZLE_4_CODE;
 	useEffect(() => {
 		const style = document.createElement("link");
 		style.rel = "stylesheet";
@@ -41,7 +42,7 @@ export default function Puzzle() {
 				<p>Can you remember the legendary cheat?</p>
 				{solved && (
 					<div className="code">
-						<p>The password is: Ghdc@3c</p>
+						<p>The password is: {password}</p>
 					</div>
 				)}
 				{useKeySequence(
