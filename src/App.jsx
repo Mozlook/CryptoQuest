@@ -46,9 +46,15 @@ function App() {
 	const [isRegisterFormOpen, setIsRegisterFormOpen] = useState(false);
 	const [tekst, setTekst] = useState("");
 	const [isLoggedIn, setIsLoggedIn] = useState(
-		!!localStorage.getItem("authToken") && !!sessionStorage.getItem("authToken")
+		!!localStorage.getItem("authToken") || !!sessionStorage.getItem("authToken")
 	);
-	const localToken = sessionStorage.getItem("authToken");
+	let localToken;
+	if (localStorage.getItem("authToken")) {
+		localToken = localStorage.getItem("authToken");
+	} else if (sessionStorage.getItem("authToken")) {
+		localToken = sessionStorageStorage.getItem("authToken");
+	}
+
 	/**
 	 * Checks the user's puzzle progress on app load or login.
 	 * If the user is not logged in, resets the puzzle to ID 1.

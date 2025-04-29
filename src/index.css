@@ -5,7 +5,6 @@
 }
 
 :root {
-	/* Kolory */
 	--bg-primary: #0d1117;
 	--bg-secondary: #161b22;
 	--bg-tertiary: #21262d;
@@ -17,14 +16,12 @@
 	--accent-active: #1158c7;
 	--border-color: #30363d;
 
-	/* Odstępy */
 	--spacing-xs: 0.5rem;
 	--spacing-sm: 0.75rem;
 	--spacing-md: 1rem;
 	--spacing-lg: 1.5rem;
 	--spacing-xl: 2rem;
 
-	/* Zaokrąglenia */
 	--radius-sm: 12px;
 	--radius-md: 16px;
 	--radius-lg: 20px;
@@ -42,7 +39,6 @@ body {
 	line-height: 1.6;
 }
 
-/* Layout główny */
 .main {
 	display: flex;
 	flex-direction: column;
@@ -52,7 +48,6 @@ body {
 	padding-bottom: 3rem;
 }
 
-/* Nagłówek */
 header {
 	background-color: var(--bg-secondary);
 	display: flex;
@@ -96,13 +91,12 @@ header {
 	margin-right: 5px;
 }
 
-/* Puzzle Container */
 .puzzle-container {
 	background-color: rgba(22, 27, 34, 0.85);
 	backdrop-filter: blur(8px);
 	border: 1px solid rgba(88, 166, 255, 0.15);
 	color: var(--text-primary);
-	margin: 3rem auto;
+	margin: 1rem auto;
 	border-radius: var(--radius-lg);
 	height: clamp(50vh, 60vh, 70vh);
 	width: clamp(300px, 80%, 1200px);
@@ -138,7 +132,6 @@ header {
 	margin-bottom: var(--spacing-lg);
 }
 
-/* Formularz */
 .form-container {
 	background-color: var(--bg-secondary);
 	color: var(--text-primary);
@@ -209,7 +202,6 @@ header {
 	transform: translateY(1px);
 }
 
-/* Stopka */
 .footer {
 	position: absolute;
 	display: flex;
@@ -231,7 +223,6 @@ header {
 	color: rgb(197, 51, 51);
 }
 
-/* Media Queries */
 @media (max-width: 768px) {
 	.puzzle-container {
 		width: 90%;
