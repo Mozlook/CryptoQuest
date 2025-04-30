@@ -52,7 +52,7 @@ function App() {
 	if (localStorage.getItem("authToken")) {
 		localToken = localStorage.getItem("authToken");
 	} else if (sessionStorage.getItem("authToken")) {
-		localToken = sessionStorageStorage.getItem("authToken");
+		localToken = sessionStorage.getItem("authToken");
 	}
 
 	/**
